@@ -18,6 +18,15 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.signinButton);
         joinButton = (Button) findViewById(R.id.signupButton);
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent( MainActivity.this,
+                        HomeScreen.class);
+                startActivity(createIntent);
+            }
+        });
+
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

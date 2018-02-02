@@ -7,13 +7,15 @@
     tools:context="com.qbteam.questboard.MainActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/welcomeMsg"
         android:layout_width="203dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
         android:layout_marginTop="38dp"
         android:text="Welcome to QuestBoard!"
         android:textAlignment="center"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/usernameEnter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,5 +38,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/usernameEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEnter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMsg" />
+
+    <EditText
+        android:id="@+id/passwordEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="249dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/usernameEnter"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEnter" />
 
 </android.support.constraint.ConstraintLayout>
