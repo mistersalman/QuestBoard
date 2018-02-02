@@ -10,51 +10,27 @@
         android:id="@+id/signUpMessage"
         android:layout_width="123dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="38dp"
         android:text="Sign Up"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/inputName"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/inputName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter Name"
-        app:layout_constraintBottom_toTopOf="@+id/inputUsername"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpMessage" />
-
-    <EditText
-        android:id="@+id/inputUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter Username"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
-        app:layout_constraintStart_toStartOf="@+id/inputName"
-        app:layout_constraintTop_toBottomOf="@+id/inputName" />
-
-    <EditText
         android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="93dp"
         android:ems="10"
         android:inputType="textWebEmailAddress"
         android:text="Enter Email"
-        app:layout_constraintBottom_toTopOf="@+id/inputPass"
-        app:layout_constraintStart_toStartOf="@+id/inputUsername"
-        app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
+        app:layout_constraintBottom_toTopOf="@+id/confirmPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpMessage" />
 
     <EditText
         android:id="@+id/inputPass"
@@ -65,13 +41,14 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/confirmPass"
         app:layout_constraintStart_toStartOf="@+id/inputEmail"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+        app:layout_constraintVertical_bias="0.625" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="22dp"
         android:text="Sign Me Up!"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/returnButton"
@@ -83,18 +60,18 @@
         android:id="@+id/confirmPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="29dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/signUpButton"
         app:layout_constraintStart_toStartOf="@+id/inputPass"
-        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <Button
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="43dp"
         android:layout_marginStart="8dp"
         android:text="Go Back!"
         android:textAlignment="center"
