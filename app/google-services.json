@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1083571099491",
+    "firebase_url": "https://questboard-69554.firebaseio.com",
+    "project_id": "questboard-69554",
+    "storage_bucket": "questboard-69554.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083571099491:android:7c3f243dfdc5e7c5",
+        "android_client_info": {
+          "package_name": "com.qbteam.questboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083571099491-fkdvv1vd8t1i0v9pghrrpvn3k55gm386.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qbteam.questboard",
+            "certificate_hash": "001b0338ccbc24b02b2594ba75b5d9854c7368f4"
+          }
+        },
+        {
+          "client_id": "1083571099491-67hbh4vkia7vldj54bh2mdeosqt7k153.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHI6TgHvWC6Ge6YWRDo5QbQ3AjbOj_Yz0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083571099491-67hbh4vkia7vldj54bh2mdeosqt7k153.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
