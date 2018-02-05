@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +21,7 @@ public class AcctCreation extends AppCompatActivity {
 
     Button signUpButton, returnButton;
     EditText inputEmail, inputPass, confirmPass;
-    String email, password;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mobileAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,47 @@ public class AcctCreation extends AppCompatActivity {
         signUpButton = (Button) findViewById(R.id.signUpButton);
         returnButton = (Button) findViewById(R.id.returnButton);
 
+        mobileAuth = FirebaseAuth.getInstance();
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = (String) inputEmail.getText().toString();
+                String pass = (String) inputPass.getText().toString();
+                String confPass = (String) confirmPass.getText().toString();
 
+                if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confPass))
+                {
+                    if(pass.equals(confPass))
+                    {
+                        mobileAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                                //Sign up and use a completion listener to make sure it went through
+                        {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful())
+                                //Successful authentication, go to activity_main
+                                {
+                                    goToMain();
+                                    //Private method which redirects you to activity_main
+                                }
+                                else
+                                //Invalid authentication, stay on same screen
+                                {
+                                    Toast.makeText(AcctCreation.this, "Invalid Account info, try again.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Toast.makeText(AcctCreation.this, "Passwords do not match, try again.", Toast.LENGTH_LONG).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(AcctCreation.this, "One or more requirements is blank, try again.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -51,5 +88,26 @@ public class AcctCreation extends AppCompatActivity {
                 startActivity(createIntent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mobileAuth.getCurrentUser();
+
+        if(currentUser != null)
+        {
+            goToMain();
+        }
+
+    }
+
+    private void goToMain()
+    {
+        Intent createIntent = new Intent(AcctCreation.this,
+                MainActivity.class);
+        startActivity(createIntent);
+        finish();
     }
 }
