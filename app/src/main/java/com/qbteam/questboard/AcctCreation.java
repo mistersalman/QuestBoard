@@ -33,23 +33,6 @@ public class AcctCreation extends AppCompatActivity {
         inputPass = (EditText) findViewById(R.id.inputPass);
         confirmPass = (EditText) findViewById(R.id.confirmPass);
 
-        /*mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent createIntent = new Intent (AcctCreation.this,
-                                    HomeScreen.class);
-                            startActivity(createIntent);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                        }
-
-                        // ...
-                    }
-                });*/
-
         signUpButton = (Button) findViewById(R.id.signUpButton);
         returnButton = (Button) findViewById(R.id.returnButton);
 
@@ -65,7 +48,7 @@ public class AcctCreation extends AppCompatActivity {
                     password = confirmPass.getText().toString();
                     //TODO: Account creation code here
                     Intent createIntent = new Intent( AcctCreation.this,
-                            HomeScreen.class);
+                            MainActivity.class);
                     startActivity(createIntent);
                 }
                 else
@@ -80,7 +63,7 @@ public class AcctCreation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent( AcctCreation.this,
-                        MainActivity.class);
+                        AcctLogin.class);
                 startActivity(createIntent);
             }
         });
