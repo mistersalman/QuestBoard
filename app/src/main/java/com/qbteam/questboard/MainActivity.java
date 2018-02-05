@@ -20,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //Declare and instantiate Firebase user with the current user to check if anyone is logged in
 
         if(currentUser == null)
+        //If no user is logged in, go to activity_acct_login
         {
             Intent createIntent = new Intent(MainActivity.this,
                     AcctLogin.class);

@@ -39,22 +39,6 @@ public class AcctCreation extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Cannot succeed on button click until these are accounted for
-                if((inputEmail.getText().toString() != null) &&
-                        (inputPass.getText().toString() != null) &&
-                        (inputPass.getText().toString() == confirmPass.getText().toString()))
-                {
-                    email = inputEmail.getText().toString();
-                    password = confirmPass.getText().toString();
-                    //TODO: Account creation code here
-                    Intent createIntent = new Intent( AcctCreation.this,
-                            MainActivity.class);
-                    startActivity(createIntent);
-                }
-                else
-                {
-                    //TODO: Add popup message for not having proper credentials
-                }
 
             }
         });
