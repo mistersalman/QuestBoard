@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/usernameEnter"
+        android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeMsg" />
 
     <EditText
-        android:id="@+id/passwordEnter"
+        android:id="@+id/inputPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="249dp"
@@ -71,8 +71,8 @@
         android:inputType="textPassword"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/usernameEnter"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEnter" />
+        app:layout_constraintStart_toStartOf="@+id/inputEmail"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <TextView
         android:id="@+id/textView"

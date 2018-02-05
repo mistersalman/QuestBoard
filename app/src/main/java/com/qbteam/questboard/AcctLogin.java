@@ -41,6 +41,14 @@ public class AcctLogin extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(inputEmail == null)
+                {
+                    System.out.println("Problem Email");
+                }
+                if(inputPass == null)
+                {
+                    System.out.println("Problem Pass");
+                }
                 String email = (String) inputEmail.getText().toString();
                 String password = (String) inputPass.getText().toString();
                 //Get string values of email and password
