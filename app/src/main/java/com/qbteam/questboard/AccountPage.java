@@ -28,10 +28,11 @@ import com.google.firebase.storage.UploadTask;
 
 public class AccountPage extends AppCompatActivity {
 
-    private static final int FILE_REQUEST_CODE = 22;
+    private static final int IMAGE_REQUEST_CODE = 22;
+    private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     EditText bio;
-    Button changePicture;
+    Button changePicture, uploadResume;
     ImageView imageView;
 
     Uri filePath, downloadUrl;
@@ -46,6 +47,7 @@ public class AccountPage extends AppCompatActivity {
         bio = (EditText) findViewById(R.id.bio);
 
         changePicture = (Button) findViewById(R.id.changePicture);
+        uploadResume = (Button) findViewById(R.id.uploadResume);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -66,14 +68,25 @@ public class AccountPage extends AppCompatActivity {
                 //Opens file explorer and looks for an image
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                //intent.setType("application/pdf"); //for pdf
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 //Calls onActivityResult after exit
-                startActivityForResult(intent, FILE_REQUEST_CODE);
+                startActivityForResult(intent, IMAGE_REQUEST_CODE);
 
             }
         });
 
+        uploadResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Opens file explorer and looks for a pdf
+                Intent intent = new Intent();
+                intent.setType("application/pdf"); //for pdf
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                //Calls onActivityResult after exit
+                startActivityForResult(intent, PDF_REQUEST_CODE);
+
+            }
+        });
     }
 
     @Override
@@ -98,13 +111,38 @@ public class AccountPage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Check if image is selected
-        if(requestCode == FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null)
+        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null)
         {
             //Uploads image as profile.png, works for jpg as well
             //Gets path of image
             filePath = data.getData();
             //Set destination
             StorageReference fileRef = storageRef.child(currentUser.getEmail()+"/profile.png");
+            //Uploads the file
+            UploadTask uploadTask = fileRef.putFile(filePath);
+            //Runs depending on upload success or failure, current ain't doing anything
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    downloadUrl = taskSnapshot.getDownloadUrl();
+                }
+            });
+
+        }
+
+        if(requestCode == PDF_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null)
+        {
+            //Uploads image as profile.png, works for jpg as well
+            //Gets path of image
+            filePath = data.getData();
+            //Set destination
+            StorageReference fileRef = storageRef.child(currentUser.getEmail()+"/resume.pdf");
             //Uploads the file
             UploadTask uploadTask = fileRef.putFile(filePath);
             //Runs depending on upload success or failure, current ain't doing anything
