@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".AcctCreation" />
         <activity android:name=".AccountPage" />
+        <activity android:name=".AccountPageEdit" />
         <activity android:name=".AcctLogin"></activity>
     </application>
 

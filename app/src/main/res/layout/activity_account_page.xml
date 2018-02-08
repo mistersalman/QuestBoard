@@ -4,32 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qbteam.questboard.AccountPage">
+    tools:context="com.qbteam.questboard.AccountPage"
+    tools:layout_editor_absoluteY="81dp">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="238dp"
-        android:layout_height="194dp"
-        android:layout_marginBottom="300dp"
-        android:layout_marginTop="66dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="54dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.611"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/common_full_open_on_phone" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="256dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginStart="174dp"
         android:layout_marginTop="16dp"
         android:text="User"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,30 +37,29 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="226dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="225dp"
         android:text="Bio"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="94dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
         android:text="Resume"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/uploadResume"
         app:layout_constraintEnd_toEndOf="@+id/uploadResume" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
+        android:layout_marginEnd="47dp"
         android:text="Job History"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,39 +70,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:layout_marginEnd="260dp"
-        android:layout_marginRight="260dp"
         android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="14dp"
         android:text="View"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="145dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
         android:text="Inputted bio"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="16dp"
-        android:text="Edit "
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="1dp"
+        android:text="Edit"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

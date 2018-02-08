@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qbteam.questboard.AccountPage">
+    tools:context="com.qbteam.questboard.AccountPageEdit"
+    tools:layout_editor_absoluteY="81dp">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="167dp"
-        android:layout_height="156dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginBottom="300dp"
         android:layout_marginTop="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:text="Bio"
         app:layout_constraintBottom_toTopOf="@+id/bio"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,7 +72,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginLeft="41dp"
         android:layout_marginTop="8dp"
         android:text="Resume"
         app:layout_constraintStart_toStartOf="@+id/bio"
@@ -83,7 +82,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
         android:text="Job History"
         app:layout_constraintEnd_toEndOf="@+id/bio"
@@ -95,9 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="260dp"
-        android:layout_marginRight="260dp"
         android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
         android:layout_marginTop="14dp"
         android:text="Upload"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,14 +101,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <Button
+        android:id="@+id/viewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="16dp"
-        android:text="View "
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="28dp"
+        android:text="View"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

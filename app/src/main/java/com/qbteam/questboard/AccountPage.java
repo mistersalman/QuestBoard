@@ -32,7 +32,7 @@ public class AccountPage extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     EditText bio;
-    Button changePicture, uploadResume;
+    Button editAcct, viewResume;
     ImageView imageView;
 
     Uri filePath, downloadUrl;
@@ -46,8 +46,8 @@ public class AccountPage extends AppCompatActivity {
 
         bio = (EditText) findViewById(R.id.bio);
 
-        changePicture = (Button) findViewById(R.id.changePicture);
-        uploadResume = (Button) findViewById(R.id.uploadResume);
+        editAcct = (Button) findViewById(R.id.editButton);
+        viewResume = (Button) findViewById(R.id.uploadResume);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -61,21 +61,17 @@ public class AccountPage extends AppCompatActivity {
                 .skipMemoryCache(true)
                 .into(imageView);
 
-
-        changePicture.setOnClickListener(new View.OnClickListener() {
+        editAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Opens file explorer and looks for an image
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                //Calls onActivityResult after exit
-                startActivityForResult(intent, IMAGE_REQUEST_CODE);
-
+                Intent createIntent = new Intent(AccountPage.this,
+                        AccountPageEdit.class);
+                startActivity(createIntent);
+                //Go to account management page
             }
         });
 
-        uploadResume.setOnClickListener(new View.OnClickListener() {
+        viewResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Opens file explorer and looks for a pdf

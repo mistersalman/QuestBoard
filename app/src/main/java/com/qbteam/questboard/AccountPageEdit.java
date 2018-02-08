@@ -28,7 +28,7 @@ public class AccountPageEdit extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     EditText bio;
-    Button changePicture, uploadResume;
+    Button viewAcct, changePicture, uploadResume;
     ImageView imageView;
 
     Uri filePath, downloadUrl;
@@ -42,6 +42,7 @@ public class AccountPageEdit extends AppCompatActivity {
 
         bio = (EditText) findViewById(R.id.bio);
 
+        viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
         uploadResume = (Button) findViewById(R.id.uploadResume);
 
@@ -56,6 +57,17 @@ public class AccountPageEdit extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(imageView);
+
+        viewAcct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(AccountPageEdit.this,
+                        AccountPage.class);
+                startActivity(createIntent);
+                finish();
+                //Go to account management page
+            }
+        });
 
 
         changePicture.setOnClickListener(new View.OnClickListener() {
