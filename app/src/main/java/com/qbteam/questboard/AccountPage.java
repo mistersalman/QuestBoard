@@ -66,6 +66,7 @@ public class AccountPage extends AppCompatActivity {
                 Intent createIntent = new Intent(AccountPage.this,
                         AccountPageEdit.class);
                 startActivity(createIntent);
+                finish();
                 //Go to account management page
             }
         });
