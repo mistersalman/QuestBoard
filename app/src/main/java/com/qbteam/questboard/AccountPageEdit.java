@@ -27,7 +27,7 @@ public class AccountPageEdit extends AppCompatActivity {
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    EditText bio;
+    EditText bio, Name, Education, Age;
     Button viewAcct, changePicture, uploadResume;
     ImageView imageView;
 
@@ -41,6 +41,9 @@ public class AccountPageEdit extends AppCompatActivity {
         setContentView(R.layout.activity_account_edit_page);
 
         bio = (EditText) findViewById(R.id.bio);
+        Name = (EditText) findViewById(R.id.Name);
+        Education = (EditText) findViewById(R.id.Education);
+        Age= (EditText) findViewById(R.id.Age);
 
         viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
