@@ -9,8 +9,6 @@ public class QBUser {
     String email;
     String name;
     String education;
-    String resume_filepath;
-    String picture_filepath;
     int age;
 
     QBUser()
@@ -19,8 +17,6 @@ public class QBUser {
         email = "";
         name = "";
         education = "";
-        resume_filepath = "";
-        picture_filepath = "";
         age = 0;
     }
 
@@ -30,8 +26,6 @@ public class QBUser {
         bio = "";
         name = "";
         education = "";
-        resume_filepath = "";
-        picture_filepath = "";
         age = 0;
     }
 
@@ -48,16 +42,6 @@ public class QBUser {
     void setEducation(String education)
     {
         this.education = education;
-    }
-
-    void setResume_filepath(String resume_filepath)
-    {
-        this.resume_filepath = resume_filepath;
-    }
-
-    void setPicture_filepath(String picture_filepath)
-    {
-        this.picture_filepath = picture_filepath;
     }
 
     String getBio()
@@ -78,16 +62,6 @@ public class QBUser {
     String getEmail()
     {
         return email;
-    }
-
-    String getResume_filepath()
-    {
-        return resume_filepath;
-    }
-
-    String getPicture_filepath()
-    {
-        return picture_filepath;
     }
 
     int getAge()

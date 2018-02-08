@@ -50,11 +50,11 @@ public class AccountPageEdit extends AppCompatActivity {
         Bio = (EditText) findViewById(R.id.Bio);
         Name = (EditText) findViewById(R.id.Name);
         Education = (EditText) findViewById(R.id.Education);
-        Age= (EditText) findViewById(R.id.Age);
+        Age = (EditText) findViewById(R.id.Age);
 
         viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
-        uploadResume = (Button) findViewById(R.id.uploadResume);
+        uploadResume = (Button) findViewById(R.id.homeButton);
         updateButton = (Button) findViewById(R.id.updateButton);
 
         mobileAuth = FirebaseAuth.getInstance();
@@ -110,6 +110,37 @@ public class AccountPageEdit extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String bio = Bio.getText().toString();
+                final String name = Name.getText().toString();
+                final String education = Education.getText().toString();
+                final int age = Integer.parseInt(Age.getText().toString());
+
+                mobileAuth = FirebaseAuth.getInstance();
+                currentUser = mobileAuth.getCurrentUser();
+                final String path = "users/" + currentUser.getUid().toString() + "/";
+
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = database.getReference();
+                databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        databaseReference.child(path).child("bio").setValue(bio);
+                        databaseReference.child(path).child("name").setValue(name);
+                        databaseReference.child(path).child("education").setValue(education);
+                        databaseReference.child(path).child("age").setValue(age);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                Intent createIntent = new Intent(AccountPageEdit.this,
+                        AccountPage.class);
+                startActivity(createIntent);
+                finish();
+                //Go to account management page
 
             }
         });

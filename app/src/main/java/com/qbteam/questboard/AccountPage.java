@@ -1,10 +1,6 @@
 package com.qbteam.questboard;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,15 +27,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 public class AccountPage extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
-    Button editAcct, viewResume;
+    Button editAcct, goHome;
     ImageView imageView;
 
     Uri filePath, downloadUrl;
@@ -53,7 +46,7 @@ public class AccountPage extends AppCompatActivity {
         setContentView(R.layout.activity_account_page);
 
         editAcct = (Button) findViewById(R.id.editButton);
-        viewResume = (Button) findViewById(R.id.uploadResume);
+        goHome = (Button) findViewById(R.id.homeButton);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -77,15 +70,14 @@ public class AccountPage extends AppCompatActivity {
             }
         });
 
-        viewResume.setOnClickListener(new View.OnClickListener() {
+        goHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Opens file explorer and looks for a pdf
-                Intent intent = new Intent();
-                intent.setType("application/pdf"); //for pdf
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                //Calls onActivityResult after exit
-                startActivityForResult(intent, PDF_REQUEST_CODE);
+                Intent createIntent = new Intent(AccountPage.this,
+                        MainActivity.class);
+                startActivity(createIntent);
+                finish();
+                //Go to account management page
 
             }
         });

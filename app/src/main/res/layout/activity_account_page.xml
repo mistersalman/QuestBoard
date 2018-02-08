@@ -64,8 +64,8 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:text="Resume"
-        app:layout_constraintBottom_toTopOf="@+id/uploadResume"
-        app:layout_constraintEnd_toEndOf="@+id/uploadResume" />
+        app:layout_constraintBottom_toTopOf="@+id/homeButton"
+        app:layout_constraintEnd_toEndOf="@+id/homeButton" />
 
     <TextView
         android:id="@+id/textView6"
@@ -79,13 +79,12 @@
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <Button
-        android:id="@+id/uploadResume"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:text="View"
+        android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
