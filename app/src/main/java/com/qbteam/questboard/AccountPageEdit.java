@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -136,10 +137,11 @@ public class AccountPageEdit extends AppCompatActivity {
 
                     }
                 });
-                Intent createIntent = new Intent(AccountPageEdit.this,
-                        AccountPage.class);
-                startActivity(createIntent);
-                finish();
+//                Intent createIntent = new Intent(AccountPageEdit.this,
+//                        AccountPage.class);
+//                startActivity(createIntent);
+//                finish();
+                Toast.makeText(AccountPageEdit.this, "Info Updated!", Toast.LENGTH_LONG).show();
                 //Go to account management page
 
             }
