@@ -17,8 +17,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AcctCreation extends AppCompatActivity {
+public class AcctCreation extends AppCompatActivity{
 
+    QBUser test;
     Button signUpButton, returnButton;
     EditText inputEmail, inputPass, confirmPass;
     private FirebaseAuth mobileAuth;

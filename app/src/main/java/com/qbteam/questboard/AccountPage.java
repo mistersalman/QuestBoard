@@ -25,7 +25,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
 public class AccountPage extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST_CODE = 22;
