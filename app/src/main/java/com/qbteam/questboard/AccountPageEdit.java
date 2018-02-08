@@ -38,7 +38,7 @@ public class AccountPageEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_page);
+        setContentView(R.layout.activity_account_edit_page);
 
         bio = (EditText) findViewById(R.id.bio);
 

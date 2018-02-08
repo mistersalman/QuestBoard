@@ -31,7 +31,6 @@ public class AccountPage extends AppCompatActivity {
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    EditText bio;
     Button editAcct, viewResume;
     ImageView imageView;
 
@@ -43,8 +42,6 @@ public class AccountPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_page);
-
-        bio = (EditText) findViewById(R.id.bio);
 
         editAcct = (Button) findViewById(R.id.editButton);
         viewResume = (Button) findViewById(R.id.uploadResume);
