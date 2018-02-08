@@ -15,12 +15,24 @@ public class QBUser {
 
     QBUser()
     {
-
+        bio = "";
+        email = "";
+        name = "";
+        education = "";
+        resume_filepath = "";
+        picture_filepath = "";
+        age = 0;
     }
 
     QBUser(String email)
     {
         this.email = email;
+        bio = "";
+        name = "";
+        education = "";
+        resume_filepath = "";
+        picture_filepath = "";
+        age = 0;
     }
 
     void setBio(String bio)
@@ -76,5 +88,10 @@ public class QBUser {
     String getPicture_filepath()
     {
         return picture_filepath;
+    }
+
+    int getAge()
+    {
+        return age;
     }
 }

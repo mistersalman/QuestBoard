@@ -5,10 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -17,6 +19,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -27,8 +34,8 @@ public class AccountPageEdit extends AppCompatActivity {
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    EditText bio, Name, Education, Age;
-    Button viewAcct, changePicture, uploadResume;
+    EditText Bio, Name, Education, Age;
+    Button viewAcct, changePicture, uploadResume, updateButton;
     ImageView imageView;
 
     Uri filePath, downloadUrl;
@@ -40,7 +47,7 @@ public class AccountPageEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_edit_page);
 
-        bio = (EditText) findViewById(R.id.bio);
+        Bio = (EditText) findViewById(R.id.Bio);
         Name = (EditText) findViewById(R.id.Name);
         Education = (EditText) findViewById(R.id.Education);
         Age= (EditText) findViewById(R.id.Age);
@@ -48,6 +55,7 @@ public class AccountPageEdit extends AppCompatActivity {
         viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
         uploadResume = (Button) findViewById(R.id.uploadResume);
+        updateButton = (Button) findViewById(R.id.updateButton);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -95,6 +103,13 @@ public class AccountPageEdit extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 //Calls onActivityResult after exit
                 startActivityForResult(intent, PDF_REQUEST_CODE);
+
+            }
+        });
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
@@ -173,4 +188,38 @@ public class AccountPageEdit extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Bio = (EditText) findViewById(R.id.Bio);
+        Name = (EditText) findViewById(R.id.Name);
+        Education = (EditText) findViewById(R.id.Education);
+        Age= (EditText) findViewById(R.id.Age);
+
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+        String path = "users/" + currentUser.getUid().toString() + "/";
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QBUser user = dataSnapshot.getValue(QBUser.class);
+                Log.d("any key name", dataSnapshot.toString());
+                String years = Integer.toString(user.getAge());
+                Age.setText(years, TextView.BufferType.EDITABLE);
+                Name.setText(user.getName(), TextView.BufferType.EDITABLE);
+                Education.setText(user.getEducation(), TextView.BufferType.EDITABLE);
+                Bio.setText(user.getBio(), TextView.BufferType.EDITABLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }

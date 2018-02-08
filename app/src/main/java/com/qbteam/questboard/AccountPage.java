@@ -9,10 +9,12 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -21,15 +23,23 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
 
 public class AccountPage extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    TextView Bio, Name, Education, Age;
     Button editAcct, viewResume;
     ImageView imageView;
 
@@ -154,4 +164,38 @@ public class AccountPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Bio = (TextView) findViewById(R.id.Bio);
+        Name = (TextView) findViewById(R.id.Name);
+        Education = (TextView) findViewById(R.id.Education);
+        Age= (TextView) findViewById(R.id.Age);
+
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+        String path = "users/" + currentUser.getUid().toString() + "/";
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QBUser user = dataSnapshot.getValue(QBUser.class);
+                Log.d("any key name", dataSnapshot.toString());
+                String years = Integer.toString(user.getAge());
+                Age.setText(years);
+                Name.setText(user.getName());
+                Education.setText(user.getEducation());
+                Bio.setText(user.getBio());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }

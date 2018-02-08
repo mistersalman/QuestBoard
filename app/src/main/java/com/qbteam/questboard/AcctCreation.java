@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AcctCreation extends AppCompatActivity{
 
@@ -42,7 +44,7 @@ public class AcctCreation extends AppCompatActivity{
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = (String) inputEmail.getText().toString();
+                final String email = (String) inputEmail.getText().toString();
                 String pass = (String) inputPass.getText().toString();
                 String confPass = (String) confirmPass.getText().toString();
 
@@ -58,6 +60,11 @@ public class AcctCreation extends AppCompatActivity{
                                 if(task.isSuccessful())
                                 //Successful authentication, go to activity_main
                                 {
+                                    QBUser user = new QBUser(email);
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference = database.getReference();
+                                    String path = "users/" + mobileAuth.getUid().toString();
+                                    databaseReference.child(path).setValue(user);
                                     goToMain();
                                     //Private method which redirects you to activity_main
                                 }
