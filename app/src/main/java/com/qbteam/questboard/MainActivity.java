@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button acctMgmt, logout;
+    private Button acctMgmt, logout, postQuest, viewQuestBoard;
     private FirebaseAuth mobileAuth;
 
     @Override
@@ -19,12 +19,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        postQuest = (Button) findViewById(R.id.postQuestButton);
+        viewQuestBoard = (Button) findViewById(R.id.viewQuestBoardButton);
         acctMgmt = (Button) findViewById(R.id.acctMgmtButton);
         logout = (Button) findViewById(R.id.logoutButton);
         //Instantiate buttons
 
         mobileAuth = FirebaseAuth.getInstance();
         //Instantiate firebase mAuth
+
+        postQuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(MainActivity.this,
+                        PostNewQuest.class);
+                startActivity(createIntent);
+                //Go to account management page
+            }
+        });
+
+        /*viewQuestBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(MainActivity.this,
+                        AccountPage.class);
+                startActivity(createIntent);
+                //Go to account management page
+            }
+        });*/
 
         acctMgmt.setOnClickListener(new View.OnClickListener() {
             @Override
