@@ -1,4 +1,6 @@
 package com.qbteam.questboard;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sazmi on 2/7/2018.
@@ -10,6 +12,7 @@ public class QBUser {
     String name;
     String education;
     int age;
+    List<String> posts;
 
     QBUser()
     {
@@ -18,6 +21,7 @@ public class QBUser {
         name = "";
         education = "";
         age = 0;
+        posts = new ArrayList<>();
     }
 
     QBUser(String email)
@@ -27,6 +31,7 @@ public class QBUser {
         name = "";
         education = "";
         age = 0;
+        posts = new ArrayList<>();
     }
 
     void setBio(String bio)
@@ -43,6 +48,8 @@ public class QBUser {
     {
         this.education = education;
     }
+
+    void addPost(String postName){this.posts.add(postName);}
 
     String getBio()
     {
