@@ -50,6 +50,8 @@ public class QuestList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quest_list);
 
+        questList = (ListView) findViewById(R.id.itemList);
+
         /*
         These are all the buttons, you should probably be able to see that pretty easy
          */
@@ -79,17 +81,17 @@ public class QuestList extends AppCompatActivity {
             }
         });
 
-//        questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("postID", parent.getItemAtPosition(position).toString());
-//                viewIntent.putExtras(bundle);
-//                startActivity(viewIntent);
-//                finish();
-//            }
-//        });
+        questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", titles.get(position).toString());
+                viewIntent.putExtras(bundle);
+                startActivity(viewIntent);
+                finish();
+            }
+        });
     }
 
     @Override
