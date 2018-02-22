@@ -71,14 +71,6 @@ public class PostNewQuest extends AppCompatActivity {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference databaseReference = database.getReference();
 
-                    final String postIDPath = "postID/";
-                    postID pID = new postID(postIdentifier);
-                    databaseReference.child(postIDPath);
-                    DatabaseReference ref = databaseReference.child(postIDPath).push();
-                    ref.setValue(pID);
-                    final String postPath = "posts/" + postIdentifier + "/";
-                    databaseReference.child(postPath).setValue(post);
-
                     databaseReference.child(userPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
