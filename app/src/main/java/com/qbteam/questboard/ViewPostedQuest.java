@@ -24,13 +24,10 @@ import java.util.List;
 
 public class ViewPostedQuest extends AppCompatActivity {
 
-    private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2, tagsTextView2;
+    private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
     private Button applyEditQuestButton, backButton;
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
-
-    Intent intentBundle = getIntent();
-    Bundle extrasBundle = intentBundle.getExtras();
 
     String postID;
 
@@ -102,7 +99,9 @@ public class ViewPostedQuest extends AppCompatActivity {
         questDescriptionTextView2 = (TextView) findViewById(R.id.questDescriptionTextView2);
         requirementsTextView2 = (TextView) findViewById(R.id.requirementsTextView2);
         rewardsTextView2 = (TextView) findViewById(R.id.rewardsTextView2);
-        tagsTextView2 = (TextView) findViewById(R.id.tagsTextView);
+
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
 
         //TODO Create corresponding bundle in QuestList
     if(extrasBundle != null)
@@ -124,17 +123,6 @@ public class ViewPostedQuest extends AppCompatActivity {
                 questDescriptionTextView2.setText(post.getDescription(), TextView.BufferType.EDITABLE);
                 requirementsTextView2.setText(post.getRequirements(), TextView.BufferType.EDITABLE);
                 rewardsTextView2.setText(post.getRewards(), TextView.BufferType.EDITABLE);
-                String tag = "";
-
-                for(int i = 0; i < post.getTags().size(); i ++)
-                {
-                    tag += post.getTags().get(i);
-                    if(i != post.getTags().size() - 1)
-                    {
-                        tag += ", ";
-                    }
-                }
-                tagsTextView2.setText(tag, TextView.BufferType.EDITABLE);
             }
 
             @Override
