@@ -70,6 +70,9 @@ public class PostNewQuest extends AppCompatActivity {
                             requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags);
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference databaseReference = database.getReference();
+
+                    final String postIDPath = "postID/";
+                    databaseReference.child(postIDPath).setValue(postID);
                     final String postPath = "posts/" + postID + "/";
                     databaseReference.child(postPath).setValue(post);
 
