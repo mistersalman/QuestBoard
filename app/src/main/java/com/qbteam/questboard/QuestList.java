@@ -40,9 +40,6 @@ public class QuestList extends AppCompatActivity {
     String titles[];
     String descriptions[];
 
-    FirebaseAuth mobileAuth;
-    FirebaseUser currentUser = mobileAuth.getCurrentUser();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
