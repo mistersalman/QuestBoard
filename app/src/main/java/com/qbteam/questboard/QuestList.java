@@ -40,9 +40,9 @@ public class QuestList extends AppCompatActivity {
     Button profile, newQuest;
     ListView questList;
 
-    ArrayList<String> titles;
-    ArrayList<String> descriptions;
-    ArrayList<String> postID;
+    ArrayList<String> titles = new ArrayList<String>();;
+    ArrayList<String> descriptions = new ArrayList<String>();;
+    ArrayList<String> postID = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +107,13 @@ public class QuestList extends AppCompatActivity {
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = (String) ds.toString();
-                    System.out.println(key);
 
+                    titles.add("test");
+                    titles.add("pleasework");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();
+                    //titles.add(ds.child("/title").getValue(String.class));
+                    //descriptions.add(dataSnapshot.child("/description").getValue(String.class));
 //                    keyReference.addValueEventListener(new ValueEventListener() {
 //                        @Override
 //                        public void onDataChange(DataSnapshot dataSnapshot) {
@@ -132,7 +135,7 @@ public class QuestList extends AppCompatActivity {
                 // The normal syntax I found was just "this, R.layout, etc" but for some reason it didn't work
 
                 //List<String> titlelist = new ArrayList<String>(Arrays.asList(titles));
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, R.id.itemList, titles);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titles);
                 questList.setAdapter(arrayAdapter);
             }
 
