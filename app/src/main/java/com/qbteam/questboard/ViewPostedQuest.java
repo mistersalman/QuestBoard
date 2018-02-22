@@ -37,8 +37,14 @@ public class ViewPostedQuest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_posted_quest);
 
-        mobileAuth = FirebaseAuth.getInstance();
-        currentUser = mobileAuth.getCurrentUser();
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
+
+        //TODO Create corresponding bundle in QuestList
+        if(extrasBundle != null)
+        {
+            postID = extrasBundle.getString("postID", postID);
+        }
 
         applyEditQuestButton = (Button) findViewById(R.id.applyEditQuestButton);
         backButton = (Button) findViewById(R.id.backButton);
@@ -46,6 +52,8 @@ public class ViewPostedQuest extends AppCompatActivity {
         applyEditQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mobileAuth = FirebaseAuth.getInstance();
+                currentUser = mobileAuth.getCurrentUser();
                 String path = "users/" + currentUser.getUid().toString() + "/";
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -57,7 +65,7 @@ public class ViewPostedQuest extends AppCompatActivity {
                         Log.d("any key name", dataSnapshot.toString());
                         for(String s : user.getPosts())
                         {
-                            if(s.compareTo(postID) == 0)
+                            if(s.replace("%40","@").compareTo(postID) == 0)
                             {
                                 Intent intentEdit = new Intent(ViewPostedQuest.this, EditPostedQuest.class);
                                 Bundle bundle = new Bundle();
