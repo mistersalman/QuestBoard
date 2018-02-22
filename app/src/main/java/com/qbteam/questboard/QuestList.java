@@ -107,16 +107,16 @@ public class QuestList extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = (String) ds.getKey();
 
-                    DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts").child(key);
+                    DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     keyReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             //I am storing the data snapshot data in an array of posts (for possible future use) and in the titles/description string lists for actual usage right now
-                            posts[i[0]].title = dataSnapshot.child("title").getValue(String.class);
+                            posts[i[0]].title = dataSnapshot.child("/title").getValue(String.class);
                             titles[i[0]] = posts[i[0]].getTitle();
-                            posts[i[0]].description = dataSnapshot.child("description").getValue(String.class);
+                            posts[i[0]].description = dataSnapshot.child("/description").getValue(String.class);
                             descriptions[i[0]] = posts[i[0]].getDescription();
-                            posts[i[0]].rewards = dataSnapshot.child("rewards").getValue(String.class);
+                            posts[i[0]].rewards = dataSnapshot.child("/rewards").getValue(String.class);
                             i[0] += 1;
                             //still not sure why this works this way
                         }
