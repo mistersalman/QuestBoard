@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qbteam.questboard.ViewPostedQuest">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/questTitleTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
+                    android:text="Title:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/questTitleTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/questTitleTextView1"
+                    android:layout_alignBottom="@+id/questTitleTextView1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/questTitleTextView1"
+                    android:ems="18"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:id="@+id/questDescriptionTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questTitleTextView1"
+                    android:layout_alignStart="@+id/questTitleTextView1"
+                    android:layout_below="@+id/questTitleTextView1"
+                    android:layout_marginTop="15dp"
+                    android:gravity="left"
+                    android:text="Description:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/questDescriptionTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questDescriptionTextView1"
+                    android:layout_alignStart="@+id/questDescriptionTextView1"
+                    android:layout_below="@+id/questDescriptionTextView1"
+                    android:layout_marginTop="10dp"
+                    android:ems="22"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:id="@+id/viewLocationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questDescriptionTextView2"
+                    android:layout_alignStart="@+id/questDescriptionTextView2"
+                    android:layout_below="@+id/questDescriptionTextView2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Location:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <Button
+                    android:id="@+id/viewLocationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/viewLocationTextView"
+                    android:layout_alignBottom="@+id/viewLocationTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/viewLocationTextView"
+                    android:layout_toRightOf="@+id/viewLocationTextView"
+                    android:text="View Location"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/requirementsTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/viewLocationTextView"
+                    android:layout_alignStart="@+id/viewLocationTextView"
+                    android:layout_below="@+id/viewLocationButton"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Requirements:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/requirementsTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/requirementsTextView1"
+                    android:layout_alignStart="@+id/requirementsTextView1"
+                    android:layout_below="@+id/requirementsTextView1"
+                    android:layout_marginTop="10dp"
+                    android:ems="22"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:id="@+id/rewardsTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/requirementsTextView2"
+                    android:layout_alignStart="@+id/requirementsTextView2"
+                    android:layout_below="@+id/requirementsTextView2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Reward(s):"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/rewardsTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsTextView1"
+                    android:layout_alignStart="@+id/rewardsTextView1"
+                    android:layout_below="@+id/rewardsTextView1"
+                    android:layout_marginTop="10dp"
+                    android:ems="22"
+                    android:singleLine="false" />
+
+                <!--<TextView
+                    android:id="@+id/tagsTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsTextView2"
+                    android:layout_alignStart="@+id/rewardsTextView2"
+                    android:layout_below="@+id/rewardsTextView2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Tags:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/tagsTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tagsTextView1"
+                    android:layout_alignStart="@+id/tagsTextView1"
+                    android:layout_below="@+id/tagsTextView1"
+                    android:layout_marginTop="10dp"
+                    android:ems="22"
+                    android:singleLine="false" />-->
+
+                <TextView
+                    android:id="@+id/viewQuestGiverTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsTextView2"
+                    android:layout_alignStart="@+id/rewardsTextView2"
+                    android:layout_below="@+id/rewardsTextView2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Quest Giver:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <!--<TextView
+                    android:id="@+id/questGiverNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/viewQuestGiverTextView"
+                    android:layout_alignBottom="@+id/viewQuestGiverTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/viewQuestGiverTextView"
+                    android:ems="14"
+                    android:singleLine="false" />-->
+
+                <Button
+                    android:id="@+id/viewQuestGiverProfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/viewQuestGiverTextView"
+                    android:layout_alignBottom="@+id/viewQuestGiverTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/viewQuestGiverTextView"
+                    android:layout_toRightOf="@+id/viewQuestGiverTextView"
+                    android:text="View Profile"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/applyEditQuestButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/viewQuestGiverProfileButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Apply!"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

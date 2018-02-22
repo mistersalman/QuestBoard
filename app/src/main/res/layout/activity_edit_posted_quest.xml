@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qbteam.questboard.EditPostedQuest">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/questTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
+                    android:text="Title:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <EditText
+                    android:id="@+id/questTitleEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/questTitleTextView"
+                    android:layout_alignBottom="@+id/questTitleTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/questTitleTextView"
+                    android:layout_toRightOf="@+id/questTitleTextView"
+                    android:ems="15"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/questDescriptionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questTitleTextView"
+                    android:layout_alignStart="@+id/questTitleTextView"
+                    android:layout_below="@+id/questTitleEditText"
+                    android:layout_marginTop="15dp"
+                    android:gravity="left"
+                    android:text="Description:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <EditText
+                    android:id="@+id/questDescriptionEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questDescriptionTextView"
+                    android:layout_alignStart="@+id/questDescriptionTextView"
+                    android:layout_below="@+id/questDescriptionTextView"
+                    android:ems="18"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/addLocationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/questDescriptionEditText"
+                    android:layout_alignStart="@+id/questDescriptionEditText"
+                    android:layout_below="@+id/questDescriptionEditText"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Location:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <Button
+                    android:id="@+id/addLocationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/addLocationTextView"
+                    android:layout_alignBottom="@+id/addLocationTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/addLocationTextView"
+                    android:layout_toRightOf="@+id/addLocationTextView"
+                    android:text="Add Location"
+                    android:textSize="16sp"
+                    android:textAllCaps="false" />
+
+                <TextView
+                    android:id="@+id/requirementsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/addLocationTextView"
+                    android:layout_alignStart="@+id/addLocationTextView"
+                    android:layout_below="@+id/addLocationButton"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Requirements:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <EditText
+                    android:id="@+id/requirementsEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/requirementsTextView"
+                    android:layout_alignStart="@+id/requirementsTextView"
+                    android:layout_below="@+id/requirementsTextView"
+                    android:ems="18"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/rewardsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/requirementsEditText"
+                    android:layout_alignStart="@+id/requirementsEditText"
+                    android:layout_below="@+id/requirementsEditText"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Reward(s):"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <EditText
+                    android:id="@+id/rewardsEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsTextView"
+                    android:layout_alignStart="@+id/rewardsTextView"
+                    android:layout_below="@+id/rewardsTextView"
+                    android:ems="18"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/tagsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsEditText"
+                    android:layout_alignStart="@+id/rewardsEditText"
+                    android:layout_below="@+id/rewardsEditText"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Tags:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    android:textStyle="bold|italic"/>
+
+                <EditText
+                    android:id="@+id/tagsEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tagsTextView"
+                    android:layout_alignStart="@+id/tagsTextView"
+                    android:layout_below="@+id/tagsTextView"
+                    android:ems="18"
+                    android:inputType="textMultiLine" />
+
+                <Button
+                    android:id="@+id/updateQuestButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tagsEditText"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Update Quest!"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
