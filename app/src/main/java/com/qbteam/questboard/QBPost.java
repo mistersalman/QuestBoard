@@ -21,4 +21,11 @@ public class QBPost {
         this.rewards = rewards;
         this.tags = tags;
     }
+
+    String getTitle() {return title;}
+    String getDescription() {return description;}
+    String getRequirements() {return requirements;}
+    String getRewards() {return rewards;}
+
+
 }

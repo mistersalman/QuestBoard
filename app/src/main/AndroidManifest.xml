@@ -25,7 +25,8 @@
         <activity android:name=".AccountPage" />
         <activity android:name=".AccountPageEdit" />
         <activity android:name=".AcctLogin" />
-        <activity android:name=".PostNewQuest"></activity>
+        <activity android:name=".PostNewQuest" />
+        <activity android:name=".QuestList"></activity>
     </application>
 
 </manifest>

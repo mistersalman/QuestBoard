@@ -38,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*viewQuestBoard.setOnClickListener(new View.OnClickListener() {
+        viewQuestBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent(MainActivity.this,
-                        AccountPage.class);
+                        QuestList.class);
                 startActivity(createIntent);
                 //Go to account management page
             }
-        });*/
+        });
 
         acctMgmt.setOnClickListener(new View.OnClickListener() {
             @Override

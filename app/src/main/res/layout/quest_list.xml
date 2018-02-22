@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ListView
-        android:id="@+id/my_recycler_view"
+        android:id="@+id/itemList"
         android:layout_width="368dp"
         android:layout_height="409dp"
         android:layout_marginBottom="8dp"
@@ -22,14 +22,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/newQuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="+New Quest"
-        app:layout_constraintBottom_toTopOf="@+id/my_recycler_view"
+        app:layout_constraintBottom_toTopOf="@+id/itemList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/itemList"
         app:layout_constraintVertical_bias="0.0" />
 
 
