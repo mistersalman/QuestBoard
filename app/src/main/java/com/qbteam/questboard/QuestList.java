@@ -7,13 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -46,30 +45,18 @@ public class QuestList extends AppCompatActivity {
     ArrayList<String> descriptions = new ArrayList<String>();;
     ArrayList<String> postID = new ArrayList<String>();
 
-    private SearchView questSearch;
-    ArrayList<ArrayList<String>> dataBaseTags = new ArrayList<ArrayList<String>>();
-    ArrayList<String> temp;
-    ArrayList<String> titleList = new ArrayList();
-    ArrayList<String> copyList = new ArrayList();
-    String tempString, tempSwap;
-    int count, index;
-    int max = 0;
-    int[] matchList;
-    int[] 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quest_list);
 
         questList = (ListView) findViewById(R.id.itemList);
+
         /*
         These are all the buttons, you should probably be able to see that pretty easy
          */
         profile = (Button) findViewById(R.id.profile);
         newQuest = (Button) findViewById(R.id.newQuest);
-
-        questSearch = (SearchView) findViewById(R.id.questSearch);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,80 +81,15 @@ public class QuestList extends AppCompatActivity {
             }
         });
 
-        questSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                List<String> searchTags = Arrays.asList(s.split("\\s*,\\s*"));
-
-                count = 0;
-                matchList = new int[dataBaseTags.size()];
-                copyList = new ArrayList();
-
-                for(int v = 0; v < titles.size(); v++)
-                {
-                    copyList.add(titles.get(v));
-                }
-
-                for(int x = 0; x < dataBaseTags.size(); x++)
-                {
-                    for(int y = 0; y < dataBaseTags.get(x).size(); y++)
-                    {
-                        for(int z = 0; z < searchTags.size(); z++)
-                        {
-                            if(dataBaseTags.get(x).get(y).equals(searchTags.get(z)))
-                            {
-                                count++;
-                            }
-                        }
-                    }
-                    matchList[x] = count;
-                    count = 0;
-                }
-
-                for(int t = 0; t < titles.size(); t++)
-                {
-                    index = t;
-                    for(int u = t; u < titles.size();  u++)
-                    {
-                        if(matchList[u] > max)
-                        {
-                            max = matchList[u];
-                            index = u;
-                        }
-                    }
-                    tempSwap = copyList.get(t);
-                    copyList.set(t, copyList.get(index));
-                    copyList.set(index, tempSwap);
-
-                    for(int r = 0; r < copyList.size(); r++)
-                    {
-                        if(matchList[r] == 0)
-                        {
-                            copyList.remove(r);
-                            r--;
-                        }
-                    }
-
-                    //tempSwap = titles.get(t);
-                    //titles.set(t, titles.get(index));
-                    //titles.set(index, tempSwap);
-
-                    count = matchList[t];
-                    matchList[t] = matchList[index];
-                    matchList[index] = count;
-                    max = 0;
-
-                }
-
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, copyList);
-                questList.setAdapter(arrayAdapter);
-                //Toast.makeText(QuestList.this, copyList.get(0)+String.valueOf(matchList[0])+"\n"+copyList.get(1)+String.valueOf(matchList[1])+"\n"+copyList.get(2)+String.valueOf(matchList[2]), Toast.LENGTH_LONG).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", titles.get(position).toString());
+                viewIntent.putExtras(bundle);
+                startActivity(viewIntent);
+                finish();
             }
         });
     }
@@ -199,19 +121,11 @@ public class QuestList extends AppCompatActivity {
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
-                    String key = (String) ds.getRef().toString();
+                    String key = (String) ds.getRef().toString().substring(46).replace('%','@');
 
-                    titles.add(ds.child("/title").getValue(String.class));
+                    titles.add(key);
 
-                    temp = new ArrayList();
-                    for (DataSnapshot j : ds.child("/tags/").getChildren())
-                    {
-                        tempString = j.getValue(String.class);
-                        temp.add(tempString);
-                    }
-                    tempString = ds.child("/title").getValue(String.class);
-                    titleList.add(tempString);
-                    dataBaseTags.add(temp);
+                    //titles.add(ds.child("/title").getValue(String.class));
                     //titles.add("test");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();
