@@ -63,24 +63,24 @@ public class PostNewQuest extends AppCompatActivity {
 
                     String emailNoDot = currentUser.getEmail().replaceAll("[.]", "");
 
-                    final String postIdentifier = emailNoDot + date.toString() + "/";
-                    System.out.println(postIdentifier);
+                    final String postID = emailNoDot + date.toString() + "/";
+                    System.out.println(postID);
 
                     final QBPost post = new QBPost(questTitleEditText.getText().toString(), questDescriptionEditText.getText().toString(),
                             requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags);
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference databaseReference = database.getReference();
-                    final String postPath = "posts/" + postIdentifier + "/";
+                    final String postPath = "posts/" + postID + "/";
                     databaseReference.child(postPath).setValue(post);
 
                     databaseReference.child(userPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             QBUser user = dataSnapshot.getValue(QBUser.class);
-                            user.posts.add(postIdentifier);
+                            user.posts.add(postID);
                             databaseReference.child(userPath).child("posts").setValue(user.posts);
 
-                         }
+                        }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
