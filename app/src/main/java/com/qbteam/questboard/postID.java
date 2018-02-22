@@ -17,4 +17,3 @@ public class postID {
 
     public String getId(){return id;}
 }
-
