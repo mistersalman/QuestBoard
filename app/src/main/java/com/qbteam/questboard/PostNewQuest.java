@@ -74,9 +74,10 @@ public class PostNewQuest extends AppCompatActivity {
                     final String postIDPath = "postID/";
                     postID pID = new postID(postIdentifier);
                     databaseReference.child(postIDPath);
+                    DatabaseReference ref = databaseReference.child(postIDPath).push();
+                    ref.setValue(pID);
                     final String postPath = "posts/" + postIdentifier + "/";
-                    DatabaseReference newRef = databaseReference.child(postPath + postIdentifier).push();
-                    newRef.setValue(pID);
+                    databaseReference.child(postPath).setValue(post);
 
                     databaseReference.child(userPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
