@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -77,6 +78,18 @@ public class QuestList extends AppCompatActivity {
 
             }
         });
+
+//        questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("postID", parent.getItemAtPosition(position).toString());
+//                viewIntent.putExtras(bundle);
+//                startActivity(viewIntent);
+//                finish();
+//            }
+//        });
     }
 
     @Override
@@ -106,9 +119,11 @@ public class QuestList extends AppCompatActivity {
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
-                    String key = (String) ds.getRef().toString();
+                    String key = (String) ds.getRef().toString().substring(46).replace('%','@');
 
-                    titles.add(ds.child("/title").getValue(String.class));
+                    titles.add(key);
+
+                    //titles.add(ds.child("/title").getValue(String.class));
                     //titles.add("test");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();

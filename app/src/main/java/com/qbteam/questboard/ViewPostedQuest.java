@@ -105,10 +105,10 @@ public class ViewPostedQuest extends AppCompatActivity {
         tagsTextView2 = (TextView) findViewById(R.id.tagsTextView);
 
         //TODO Create corresponding bundle in QuestList
-//    if(extrasBundle != null)
-//    {
-//        postID = extrasBundle.getString("postID", QuestList.POST_ID);
-//    }
+    if(extrasBundle != null)
+    {
+        postID = extrasBundle.getString("postID", postID);
+    }
         //TODO get values from DB through post ID
 
         String postPath = "posts/" + postID + "/";
