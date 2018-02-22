@@ -92,7 +92,7 @@ public class QuestList extends AppCompatActivity {
         creating the questlist, also known as itemList from the xml file. I'm 90% sure that this is how you access it. The documentation on the ListView is actually god fucking awful. So, yaknow.
          */
         questList = (ListView) findViewById(R.id.itemList);
-        String path = "posts/";
+        final String path = "posts/";
 
 
         //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
@@ -105,14 +105,14 @@ public class QuestList extends AppCompatActivity {
                 //I'm not sure why I need final and to make it an array, but whatever, that's the only way it would work.
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String key = (String) ds.toString();
+                for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
+                    String key = (String) ds.getRef().toString();
 
+                    titles.add(key);
                     titles.add("test");
-                    titles.add("pleasework");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();
-                    //titles.add(ds.child("/title").getValue(String.class));
+                    //titles.add(dataSnapshot.child("/title").getValue(String.class));
                     //descriptions.add(dataSnapshot.child("/description").getValue(String.class));
 //                    keyReference.addValueEventListener(new ValueEventListener() {
 //                        @Override
