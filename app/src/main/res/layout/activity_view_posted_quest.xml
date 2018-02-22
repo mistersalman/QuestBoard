@@ -35,8 +35,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/questTitleTextView2"
@@ -44,8 +44,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/questTitleTextView1"
                     android:layout_alignBottom="@+id/questTitleTextView1"
-                    android:layout_toRightOf="@+id/questTitleTextView1"
                     android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/questTitleTextView1"
                     android:ems="18"
                     android:singleLine="false" />
 
@@ -62,8 +62,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/questDescriptionTextView2"
@@ -89,8 +89,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <Button
                     android:id="@+id/viewLocationButton"
@@ -102,8 +102,8 @@
                     android:layout_toEndOf="@+id/viewLocationTextView"
                     android:layout_toRightOf="@+id/viewLocationTextView"
                     android:text="View Location"
-                    android:textSize="16sp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/requirementsTextView1"
@@ -118,8 +118,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/requirementsTextView2"
@@ -145,8 +145,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/rewardsTextView2"
@@ -159,7 +159,7 @@
                     android:ems="22"
                     android:singleLine="false" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/tagsTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,8 +172,8 @@
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    android:typeface="normal"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/tagsTextView2"
@@ -184,18 +184,58 @@
                     android:layout_below="@+id/tagsTextView1"
                     android:layout_marginTop="10dp"
                     android:ems="22"
-                    android:singleLine="false" />
+                    android:singleLine="false" />-->
+
+                <TextView
+                    android:id="@+id/viewQuestGiverTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/rewardsTextView2"
+                    android:layout_alignStart="@+id/rewardsTextView2"
+                    android:layout_below="@+id/rewardsTextView2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="Quest Giver:"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="normal" />
+
+                <!--<TextView
+                    android:id="@+id/questGiverNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/viewQuestGiverTextView"
+                    android:layout_alignBottom="@+id/viewQuestGiverTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/viewQuestGiverTextView"
+                    android:ems="14"
+                    android:singleLine="false" />-->
+
+                <Button
+                    android:id="@+id/viewQuestGiverProfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/viewQuestGiverTextView"
+                    android:layout_alignBottom="@+id/viewQuestGiverTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/viewQuestGiverTextView"
+                    android:layout_toRightOf="@+id/viewQuestGiverTextView"
+                    android:text="View Profile"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/applyEditQuestButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tagsTextView2"
+                    android:layout_below="@+id/viewQuestGiverProfileButton"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:text="Apply!"
                     android:textAllCaps="false"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
 
 
             </RelativeLayout>
