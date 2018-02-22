@@ -93,7 +93,7 @@ public class QuestList extends AppCompatActivity {
         creating the questlist, also known as itemList from the xml file. I'm 90% sure that this is how you access it. The documentation on the ListView is actually god fucking awful. So, yaknow.
          */
         questList = (ListView) findViewById(R.id.itemList);
-        String path = "posts";
+        String path = "posts/";
         //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
