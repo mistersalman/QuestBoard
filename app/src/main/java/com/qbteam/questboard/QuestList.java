@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,12 +46,23 @@ public class QuestList extends AppCompatActivity {
     ArrayList<String> descriptions = new ArrayList<String>();;
     ArrayList<String> postID = new ArrayList<String>();
 
+    private SearchView questSearch;
+    ArrayList<ArrayList<String>> dataBaseTags = new ArrayList<ArrayList<String>>();
+    ArrayList<String> temp;
+    ArrayList<String> titleList = new ArrayList();
+    ArrayList<String> copyList = new ArrayList();
+    String tempString, tempSwap;
+    int count, index, value;
+    int max = 0;
+    int[] matchList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quest_list);
 
         questList = (ListView) findViewById(R.id.itemList);
+
 
         /*
         These are all the buttons, you should probably be able to see that pretty easy
@@ -92,6 +104,84 @@ public class QuestList extends AppCompatActivity {
                 finish();
             }
         });
+
+        questSearch = (SearchView) findViewById(R.id.questSearch);
+
+        questSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                List<String> searchTags = Arrays.asList(s.split("\\s*,\\s*"));
+
+                count = 0;
+                matchList = new int[dataBaseTags.size()];
+                copyList = new ArrayList();
+
+                for(int v = 0; v < titleList.size(); v++)
+                {
+                    copyList.add(titleList.get(v));
+                }
+
+                for(int x = 0; x < dataBaseTags.size(); x++)
+                {
+                    for(int y = 0; y < dataBaseTags.get(x).size(); y++)
+                    {
+                        for(int z = 0; z < searchTags.size(); z++)
+                        {
+                            if(dataBaseTags.get(x).get(y).equals(searchTags.get(z)))
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                    matchList[x] = count;
+                    count = 0;
+                }
+
+                for(int t = 0; t < titleList.size(); t++)
+                {
+                    index = t;
+                    for(int u = t; u < titleList.size();  u++)
+                    {
+                        if(matchList[u] > max)
+                        {
+                            max = matchList[u];
+                            index = u;
+                        }
+                    }
+                    tempSwap = copyList.get(t);
+                    copyList.set(t, copyList.get(index));
+                    copyList.set(index, tempSwap);
+
+                    count = matchList[t];
+                    matchList[t] = matchList[index];
+                    matchList[index] = count;
+                    max = 0;
+
+                }
+
+                for (int i = copyList.size() - 1; i > 0; i--)
+                {
+                    if(matchList[i] == 0)
+                    {
+                        copyList.remove(i);
+                    }
+                }
+                if(matchList[0] == 0)
+                {
+                    copyList.remove(0);
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, copyList);
+                questList.setAdapter(arrayAdapter);
+                //Toast.makeText(QuestListSearchTest.this, copyList.get(0)+String.valueOf(matchList[0])+"\n"+copyList.get(1)+String.valueOf(matchList[1])+"\n"+copyList.get(2)+String.valueOf(matchList[2]), Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -123,9 +213,19 @@ public class QuestList extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
                     String key = (String) ds.getRef().toString().substring(46).replace("%40", "@");
 
-                    titles.add(key);
+                    //titles.add(key);
 
-                    //titles.add(ds.child("/title").getValue(String.class));
+                    titles.add(ds.child("/title").getValue(String.class));
+
+                    temp = new ArrayList();
+                    for (DataSnapshot j : ds.child("/tags/").getChildren())
+                    {
+                        tempString = j.getValue(String.class);
+                        temp.add(tempString);
+                    }
+                    tempString = ds.child("/title").getValue(String.class);
+                    titleList.add(tempString);
+                    dataBaseTags.add(temp);
                     //titles.add("test");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();
