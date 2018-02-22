@@ -50,6 +50,9 @@ public class QuestList extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
+        /*
+        These are all the buttons, you should probably be able to see that pretty easy
+         */
         profile = (Button) findViewById(R.id.profile);
         newQuest = (Button) findViewById(R.id.newQuest);
 
@@ -86,17 +89,21 @@ public class QuestList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        /*
+        creating the questlist, also known as itemList from the xml file. I'm 90% sure that this is how you access it. The documentation on the ListView is actually god fucking awful. So, yaknow.
+         */
         questList = (ListView) findViewById(R.id.itemList);
         String path = "posts";
-
+        //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
         databaseReference.child(path);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //I'm not sure why I need final and to make it an array, but whatever, that's the only way it would work.
                 final int[] i = {0};
+                //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = (String) ds.getKey();
 
@@ -104,12 +111,14 @@ public class QuestList extends AppCompatActivity {
                     keyReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            //I am storing the data snapshot data in an array of posts (for possible future use) and in the titles/description string lists for actual usage right now
                             posts[i[0]].title = dataSnapshot.child("title").getValue(String.class);
                             titles[i[0]] = posts[i[0]].getTitle();
                             posts[i[0]].description = dataSnapshot.child("description").getValue(String.class);
                             descriptions[i[0]] = posts[i[0]].getDescription();
                             posts[i[0]].rewards = dataSnapshot.child("rewards").getValue(String.class);
                             i[0] += 1;
+                            //still not sure why this works this way
                         }
 
                         @Override
@@ -118,6 +127,8 @@ public class QuestList extends AppCompatActivity {
                         }
                     });
                 }
+                //this should be where I assign the array adapter to display the titles for now. I had to find this layout, and add QuestList into the Android manifest.
+                // The normal syntax I found was just "this, R.layout, etc" but for some reason it didn't work
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, R.layout.quest_list, R.id.itemList, titles);
                 questList.setAdapter(arrayAdapter);
             }
