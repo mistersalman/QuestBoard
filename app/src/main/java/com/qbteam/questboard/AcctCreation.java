@@ -66,7 +66,8 @@ public class AcctCreation extends AppCompatActivity{
                                     String path = "users/" + mobileAuth.getUid().toString();
                                     databaseReference.child(path).setValue(user);
                                     final String userIDPath = "userID/";
-                                    databaseReference.child(userIDPath).setValue(mobileAuth.getUid().toString());
+                                    userID uID = new userID(mobileAuth.getUid().toString());
+                                    databaseReference.child(userIDPath).setValue(uID);
                                     goToMain();
                                     //Private method which redirects you to activity_main
                                 }

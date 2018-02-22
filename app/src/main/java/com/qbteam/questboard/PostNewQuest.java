@@ -63,8 +63,8 @@ public class PostNewQuest extends AppCompatActivity {
 
                     String emailNoDot = currentUser.getEmail().replaceAll("[.]", "");
 
-                    final String postID = emailNoDot + date.toString() + "/";
-                    System.out.println(postID);
+                    final String postIdentifier = emailNoDot + date.toString() + "/";
+                    System.out.println(postIdentifier);
 
                     final QBPost post = new QBPost(questTitleEditText.getText().toString(), questDescriptionEditText.getText().toString(),
                             requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags);
@@ -72,15 +72,16 @@ public class PostNewQuest extends AppCompatActivity {
                     final DatabaseReference databaseReference = database.getReference();
 
                     final String postIDPath = "postID/";
-                    databaseReference.child(postIDPath).setValue(postID);
-                    final String postPath = "posts/" + postID + "/";
+                    postID pID = new postID(postIdentifier);
+                    databaseReference.child(postIDPath).setValue(pID);
+                    final String postPath = "posts/" + postIdentifier + "/";
                     databaseReference.child(postPath).setValue(post);
 
                     databaseReference.child(userPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             QBUser user = dataSnapshot.getValue(QBUser.class);
-                            user.posts.add(postID);
+                            user.posts.add(postIdentifier);
                             databaseReference.child(userPath).child("posts").setValue(user.posts);
 
                          }
