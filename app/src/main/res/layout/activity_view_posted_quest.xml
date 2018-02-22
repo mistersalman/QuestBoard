@@ -234,9 +234,18 @@
                     android:layout_marginTop="18dp"
                     android:layout_toEndOf="@+id/questDescriptionTextView1"
                     android:layout_toRightOf="@+id/questDescriptionTextView1"
-                    android:text="Go Back!"
+                    android:text="Edit"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/viewQuestGiverProfileButton"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/viewQuestGiverProfileButton"
+                    android:text="Back!" />
 
 
             </RelativeLayout>

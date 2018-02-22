@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +25,7 @@ import java.util.List;
 public class ViewPostedQuest extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2, tagsTextView2;
-    private Button applyEditQuestButton;
+    private Button applyEditQuestButton, backButton;
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
 
@@ -38,24 +39,57 @@ public class ViewPostedQuest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_posted_quest);
+
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+
         applyEditQuestButton = (Button) findViewById(R.id.applyEditQuestButton);
+        backButton = (Button) findViewById(R.id.backButton);
 
         applyEditQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(applyEditQuestButton.getText().toString().compareTo("Edit") == 0)
-                {
-                    Intent intentEdit = new Intent(ViewPostedQuest.this, EditPostedQuest.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", postID);
-                    intentEdit.putExtras(bundle);
-                    startActivity(intentEdit);
-                }
-                else
-                {
-                    Intent intentList = new Intent(ViewPostedQuest.this, QuestList.class);
-                    startActivity(intentList);
-                }
+                String path = "users/" + currentUser.getUid().toString() + "/";
+
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = database.getReference();
+                databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        QBUser user = dataSnapshot.getValue(QBUser.class);
+                        Log.d("any key name", dataSnapshot.toString());
+                        for(String s : user.getPosts())
+                        {
+                            if(s.compareTo(postID) == 0)
+                            {
+                                Intent intentEdit = new Intent(ViewPostedQuest.this, EditPostedQuest.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("username", postID);
+                                intentEdit.putExtras(bundle);
+                                startActivity(intentEdit);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast.makeText(ViewPostedQuest.this, "This isn't your post!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentEdit = new Intent(ViewPostedQuest.this, QuestList.class);
+                startActivity(intentEdit);
+                finish();
             }
         });
     }
@@ -70,9 +104,6 @@ public class ViewPostedQuest extends AppCompatActivity {
         rewardsTextView2 = (TextView) findViewById(R.id.rewardsTextView2);
         tagsTextView2 = (TextView) findViewById(R.id.tagsTextView);
 
-        mobileAuth = FirebaseAuth.getInstance();
-        currentUser = mobileAuth.getCurrentUser();
-
         //TODO Create corresponding bundle in QuestList
 //    if(extrasBundle != null)
 //    {
@@ -80,29 +111,30 @@ public class ViewPostedQuest extends AppCompatActivity {
 //    }
         //TODO get values from DB through post ID
 
-        checkButtonText();
-
-    }
-
-    private void checkButtonText()
-    {
-        applyEditQuestButton = (Button) findViewById(R.id.applyEditQuestButton);
-        String path = "users/" + currentUser.getUid().toString() + "/";
+        String postPath = "posts/" + postID + "/";
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
-        databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                QBUser user = dataSnapshot.getValue(QBUser.class);
+                QBPost post = dataSnapshot.getValue(QBPost.class);
                 Log.d("any key name", dataSnapshot.toString());
-                for(String s : user.getPosts())
+                questTitleTextView2.setText(post.getTitle(), TextView.BufferType.EDITABLE);
+                questDescriptionTextView2.setText(post.getDescription(), TextView.BufferType.EDITABLE);
+                requirementsTextView2.setText(post.getRequirements(), TextView.BufferType.EDITABLE);
+                rewardsTextView2.setText(post.getRewards(), TextView.BufferType.EDITABLE);
+                String tag = "";
+
+                for(int i = 0; i < post.getTags().size(); i ++)
                 {
-                    if(s.compareTo(postID) == 0)
+                    tag += post.getTags().get(i);
+                    if(i != post.getTags().size() - 1)
                     {
-                        applyEditQuestButton.setText("Edit");
+                        tag += ", ";
                     }
                 }
+                tagsTextView2.setText(tag, TextView.BufferType.EDITABLE);
             }
 
             @Override
@@ -110,5 +142,6 @@ public class ViewPostedQuest extends AppCompatActivity {
 
             }
         });
+
     }
 }

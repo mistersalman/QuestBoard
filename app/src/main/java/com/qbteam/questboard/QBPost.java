@@ -26,6 +26,7 @@ public class QBPost {
     String getDescription() {return description;}
     String getRequirements() {return requirements;}
     String getRewards() {return rewards;}
+    List<String> getTags(){return tags;}
 
 
 }
