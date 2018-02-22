@@ -105,7 +105,7 @@ public class QuestList extends AppCompatActivity {
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String key = (String) ds.getKey();
+                    String key = (String) ds.toString();
 
                     DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     keyReference.addValueEventListener(new ValueEventListener() {
