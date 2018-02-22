@@ -27,6 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Mark Spencer on 2/21/2018.
  */
@@ -36,16 +40,14 @@ public class QuestList extends AppCompatActivity {
     Button profile, newQuest;
     ListView questList;
 
-    QBPost posts[];
-    String titles[];
-    String descriptions[];
+    ArrayList<String> titles;
+    ArrayList<String> descriptions;
+    ArrayList<String> postID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quest_list);
-
-        FirebaseApp.initializeApp(this);
 
         /*
         These are all the buttons, you should probably be able to see that pretty easy
@@ -91,6 +93,8 @@ public class QuestList extends AppCompatActivity {
          */
         questList = (ListView) findViewById(R.id.itemList);
         String path = "posts/";
+
+
         //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
@@ -103,30 +107,32 @@ public class QuestList extends AppCompatActivity {
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = (String) ds.toString();
+                    System.out.println(key);
 
-                    DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
-                    keyReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            //I am storing the data snapshot data in an array of posts (for possible future use) and in the titles/description string lists for actual usage right now
-                            posts[i[0]].title = dataSnapshot.child("/title").getValue(String.class);
-                            titles[i[0]] = posts[i[0]].getTitle();
-                            posts[i[0]].description = dataSnapshot.child("/description").getValue(String.class);
-                            descriptions[i[0]] = posts[i[0]].getDescription();
-                            posts[i[0]].rewards = dataSnapshot.child("/rewards").getValue(String.class);
-                            i[0] += 1;
-                            //still not sure why this works this way
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
+                    DatabaseReference keyReference = ds.getRef();
+//                    keyReference.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            //I am storing the data snapshot data in an array of posts (for possible future use) and in the titles/description string lists for actual usage right now
+//                            posts[i[0]].title = dataSnapshot.child("/title").getValue(String.class);
+//                            titles[i[0]] = posts[i[0]].getTitle();
+//                            posts[i[0]].description = dataSnapshot.child("/description").getValue(String.class);
+//                            descriptions.add(dataSnapshot.child("/description").getValue(String.class));
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
                 }
                 //this should be where I assign the array adapter to display the titles for now. I had to find this layout, and add QuestList into the Android manifest.
                 // The normal syntax I found was just "this, R.layout, etc" but for some reason it didn't work
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, R.layout.quest_list, R.id.itemList, titles);
+
+                //List<String> titlelist = new ArrayList<String>(Arrays.asList(titles));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, R.id.itemList, titles);
                 questList.setAdapter(arrayAdapter);
             }
 
