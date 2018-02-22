@@ -234,7 +234,7 @@
                     android:layout_marginTop="18dp"
                     android:layout_toEndOf="@+id/questDescriptionTextView1"
                     android:layout_toRightOf="@+id/questDescriptionTextView1"
-                    android:text="Apply!"
+                    android:text="Go Back!"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
 

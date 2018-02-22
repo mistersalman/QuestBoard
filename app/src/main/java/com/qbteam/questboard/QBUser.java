@@ -75,4 +75,6 @@ public class QBUser {
     {
         return age;
     }
+
+    List<String> getPosts(){return posts;}
 }
