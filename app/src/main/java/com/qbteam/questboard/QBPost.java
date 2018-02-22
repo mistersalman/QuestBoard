@@ -1,5 +1,6 @@
 package com.qbteam.questboard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,15 @@ public class QBPost {
     String requirements;
     String rewards;
     List<String> tags;
+
+    QBPost()
+    {
+        title = "";
+        description = "";
+        requirements = "";
+        rewards = "";
+        tags = new ArrayList<String>();
+    }
 
     QBPost(String title, String description, String requirements, String rewards, List<String> tags)
     {
