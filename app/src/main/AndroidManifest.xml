@@ -27,8 +27,7 @@
         <activity android:name=".AcctLogin" />
         <activity android:name=".PostNewQuest" />
         <activity android:name=".ViewPostedQuest" />
-        <activity android:name=".EditPostedQuest"></activity>
-        <activity android:name=".PostNewQuest" />
+        <activity android:name=".EditPostedQuest" />
         <activity android:name=".QuestList"></activity>
     </application>
 
