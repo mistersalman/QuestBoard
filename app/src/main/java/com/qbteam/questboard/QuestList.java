@@ -108,8 +108,8 @@ public class QuestList extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
                     String key = (String) ds.getRef().toString();
 
-                    titles.add(key);
-                    titles.add("test");
+                    titles.add(ds.child("/title").getValue(String.class));
+                    //titles.add("test");
                     //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
                     DatabaseReference keyReference = ds.getRef();
                     //titles.add(dataSnapshot.child("/title").getValue(String.class));
