@@ -118,7 +118,9 @@ public class ViewPostedQuest extends AppCompatActivity {
     }
         //TODO get values from DB through post ID
 
-        String postPath = "posts/" + postID + "/";
+        //String postPath = "posts/" + postID + "/";
+        Log.d("id view: ", postID);
+        String postPath = postID;
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();

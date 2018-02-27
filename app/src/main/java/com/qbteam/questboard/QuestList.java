@@ -51,6 +51,7 @@ public class QuestList extends AppCompatActivity {
     ArrayList<String> temp;
     ArrayList<String> titleList = new ArrayList();
     ArrayList<String> copyList = new ArrayList();
+    ArrayList<String> idList = new ArrayList();
     String tempString, tempSwap;
     int count, index, value;
     int max = 0;
@@ -98,7 +99,8 @@ public class QuestList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("postID", titles.get(position));
+                bundle.putString("postID", idList.get(position));
+                Log.d("id list: ", idList.get(position));
                 viewIntent.putExtras(bundle);
                 startActivity(viewIntent);
                 finish();
@@ -211,7 +213,11 @@ public class QuestList extends AppCompatActivity {
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
-                    String key = (String) ds.getRef().toString().substring(46).replace("%40", "@");
+                    //String key = (String) ds.getRef().toString().substring(46).replace("%40", "@");
+                    String key = (String) ds.getRef().toString();
+                    Log.d("ref: ", key);
+
+                    idList.add(key);
 
                     //titles.add(key);
 
