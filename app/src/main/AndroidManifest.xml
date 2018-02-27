@@ -31,4 +31,7 @@
         <activity android:name=".QuestList"></activity>
     </application>
 
+    package="com.example.currentplacedetailsonmap">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 </manifest>
