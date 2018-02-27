@@ -213,7 +213,7 @@ public class QuestList extends AppCompatActivity {
                 final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
-                    String key = (String) ds.getRef().toString().substring(46);
+                    String key = (String) ds.getRef().toString().substring(40);
                     //String key = (String) ds.getRef().toString();
                     Log.d("ref: ", key);
 
