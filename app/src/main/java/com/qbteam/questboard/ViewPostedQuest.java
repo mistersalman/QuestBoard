@@ -120,7 +120,7 @@ public class ViewPostedQuest extends AppCompatActivity {
 
         //String postPath = "posts/" + postID + "/";
         Log.d("id view: ", postID);
-        String postPath = postID;
+        String postPath = postID.replace("%40", "@");
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
@@ -129,10 +129,10 @@ public class ViewPostedQuest extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 QBPost post = dataSnapshot.getValue(QBPost.class);
                 Log.d("any key name", dataSnapshot.toString());
-                questTitleTextView2.setText(post.getTitle(), TextView.BufferType.EDITABLE);
-                questDescriptionTextView2.setText(post.getDescription(), TextView.BufferType.EDITABLE);
-                requirementsTextView2.setText(post.getRequirements(), TextView.BufferType.EDITABLE);
-                rewardsTextView2.setText(post.getRewards(), TextView.BufferType.EDITABLE);
+                questTitleTextView2.setText(post.getTitle());
+                questDescriptionTextView2.setText(post.getDescription());
+                requirementsTextView2.setText(post.getRequirements());
+                rewardsTextView2.setText(post.getRewards());
             }
 
             @Override
