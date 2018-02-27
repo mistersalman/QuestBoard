@@ -40,7 +40,6 @@ public class EditPostedQuest extends AppCompatActivity {
 
         updateQuestButton = (Button) findViewById(R.id.updateQuestButton);
 
-        //final String postPath = "posts/" + postID + "/";
         final String postPath = postID;
         Log.d("id edit: ", postID);
 
@@ -70,11 +69,6 @@ public class EditPostedQuest extends AppCompatActivity {
 
                     }
                 });
-//                Intent createIntent = new Intent(AccountPageEdit.this,
-//                        AccountPage.class);
-//                startActivity(createIntent);
-//                finish();
-
             }
         });
     }

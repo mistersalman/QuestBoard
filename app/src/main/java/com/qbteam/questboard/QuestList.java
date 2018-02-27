@@ -175,7 +175,6 @@ public class QuestList extends AppCompatActivity {
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, copyList);
                 questList.setAdapter(arrayAdapter);
-                //Toast.makeText(QuestListSearchTest.this, copyList.get(0)+String.valueOf(matchList[0])+"\n"+copyList.get(1)+String.valueOf(matchList[1])+"\n"+copyList.get(2)+String.valueOf(matchList[2]), Toast.LENGTH_LONG).show();
                 return false;
             }
 
@@ -209,13 +208,9 @@ public class QuestList extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //I'm not sure why I need final and to make it an array, but whatever, that's the only way it would work.
-                final int[] i = {0};
                 //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
                     String key = (String) ds.getRef().toString().substring(40);
-                    //String key = (String) ds.getRef().toString();
-                    Log.d("ref: ", key);
 
                     idList.add(key);
 
@@ -232,32 +227,7 @@ public class QuestList extends AppCompatActivity {
                     tempString = ds.child("/title").getValue(String.class);
                     titleList.add(tempString);
                     dataBaseTags.add(temp);
-                    //titles.add("test");
-                    //DatabaseReference keyReference = FirebaseDatabase.getInstance().getReference().child("posts/").child(key);
-                    DatabaseReference keyReference = ds.getRef();
-                    //titles.add(dataSnapshot.child("/title").getValue(String.class));
-                    //descriptions.add(dataSnapshot.child("/description").getValue(String.class));
-//                    keyReference.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            //I am storing the data snapshot data in an array of posts (for possible future use) and in the titles/description string lists for actual usage right now
-//                            posts[i[0]].title = dataSnapshot.child("/title").getValue(String.class);
-//                            titles[i[0]] = posts[i[0]].getTitle();
-//                            posts[i[0]].description = dataSnapshot.child("/description").getValue(String.class);
-//                            descriptions.add(dataSnapshot.child("/description").getValue(String.class));
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
                 }
-                //this should be where I assign the array adapter to display the titles for now. I had to find this layout, and add QuestList into the Android manifest.
-                // The normal syntax I found was just "this, R.layout, etc" but for some reason it didn't work
-
-                //List<String> titlelist = new ArrayList<String>(Arrays.asList(titles));
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titles);
                 questList.setAdapter(arrayAdapter);
             }

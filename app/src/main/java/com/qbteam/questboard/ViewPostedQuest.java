@@ -117,8 +117,6 @@ public class ViewPostedQuest extends AppCompatActivity {
         postID = extrasBundle.getString("postID", postID);
     }
         //TODO get values from DB through post ID
-
-        //String postPath = "posts/" + postID + "/";
         Log.d("id view: ", postID);
         String postPath = postID.replace("%40", "@");
 
