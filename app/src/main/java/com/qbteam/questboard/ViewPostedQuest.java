@@ -65,11 +65,13 @@ public class ViewPostedQuest extends AppCompatActivity {
                         Log.d("any key name", dataSnapshot.toString());
                         for(String s : user.getPosts())
                         {
-                            if(s.replace("%40","@").compareTo(postID) == 0)
+                            Log.d("user posts: ", s);
+                            Log.d("postID: ", (postID.substring(6) + "/").replace("%40", "@"));
+                            if(s.compareTo((postID.substring(6) + "/").replace("%40", "@")) == 0)
                             {
                                 Intent intentEdit = new Intent(ViewPostedQuest.this, EditPostedQuest.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("username", postID);
+                                bundle.putString("postID", postID);
                                 intentEdit.putExtras(bundle);
                                 startActivity(intentEdit);
                                 finish();

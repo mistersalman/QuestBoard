@@ -28,9 +28,6 @@ public class EditPostedQuest extends AppCompatActivity {
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
 
-    Intent intentBundle = getIntent();
-    Bundle extrasBundle = intentBundle.getExtras();
-
     String postID;
 
     @Override
@@ -38,9 +35,17 @@ public class EditPostedQuest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_posted_quest);
 
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
+
+        if(extrasBundle != null)
+        {
+            postID = extrasBundle.getString("postID", postID);
+        }
+
         updateQuestButton = (Button) findViewById(R.id.updateQuestButton);
 
-        final String postPath = postID;
+        final String postPath = postID.replace("%40", "@");
         Log.d("id edit: ", postID);
 
         updateQuestButton.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +64,11 @@ public class EditPostedQuest extends AppCompatActivity {
                         databaseReference.child(postPath).child("tags").setValue(tags);
                         Toast.makeText(EditPostedQuest.this, "Info Updated!", Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(EditPostedQuest.this, ViewPostedQuest.class);
-                        startActivity(intent);
+                        Intent intentEdit = new Intent(EditPostedQuest.this, ViewPostedQuest.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("postID", postID);
+                        intentEdit.putExtras(bundle);
+                        startActivity(intentEdit);
                         finish();
                     }
 
@@ -77,6 +85,9 @@ public class EditPostedQuest extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
+
         questTitleEditText = (EditText) findViewById(R.id.questTitleEditText);
         questDescriptionEditText = (EditText) findViewById(R.id.questDescriptionEditText);
         requirementsEditText = (EditText) findViewById(R.id.requirementsEditText);
@@ -91,7 +102,9 @@ public class EditPostedQuest extends AppCompatActivity {
             postID = extrasBundle.getString("postID", postID);
         }
 
-        String postPath = "posts/" + postID + "/";
+        String postPath = postID.replace("%40", "@");
+
+        Log.d("postID: ", postPath);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
