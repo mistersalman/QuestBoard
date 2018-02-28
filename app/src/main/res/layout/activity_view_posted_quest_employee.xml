@@ -33,25 +33,13 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"/>
 
-                <Button
-                    android:id="@+id/viewApplicantsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignLeft="@id/questTitleTextView1"
-                    android:text="View Applicants"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"/>
-
                 <TextView
                     android:id="@+id/questTitleTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/viewApplicantsButton"
+                    android:layout_below="@+id/applyQuestButton"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="left"
