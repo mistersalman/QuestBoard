@@ -159,4 +159,13 @@
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+    <Button
+        android:id="@+id/updateLocation"
+        android:layout_width="120dp"
+        android:layout_height="33dp"
+        android:text="Add/Edit Location"
+        android:textSize="8sp"
+        tools:layout_editor_absoluteX="254dp"
+        tools:layout_editor_absoluteY="219dp" />
+
 </android.support.constraint.ConstraintLayout>

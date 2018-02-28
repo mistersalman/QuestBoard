@@ -1,6 +1,9 @@
 package com.qbteam.questboard;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,8 +39,11 @@ public class AccountPageEdit extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     EditText Bio, Name, Education, Age;
-    Button viewAcct, changePicture, uploadResume, updateButton;
+    Button viewAcct, changePicture, uploadResume, updateLocation, updateButton;
     ImageView imageView;
+
+    LocationManager locationManager;
+    LocationListener locationListener;
 
     Uri filePath, downloadUrl;
     FirebaseAuth mobileAuth;
@@ -56,6 +62,7 @@ public class AccountPageEdit extends AppCompatActivity {
         viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
         uploadResume = (Button) findViewById(R.id.homeButton);
+        updateLocation = (Button) findViewById(R.id.updateLocation);
         updateButton = (Button) findViewById(R.id.updateButton);
 
         mobileAuth = FirebaseAuth.getInstance();
@@ -104,6 +111,13 @@ public class AccountPageEdit extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 //Calls onActivityResult after exit
                 startActivityForResult(intent, PDF_REQUEST_CODE);
+
+            }
+        });
+
+        updateLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });

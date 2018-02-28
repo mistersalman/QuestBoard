@@ -9,6 +9,5 @@ public class AccountPageEmployer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_page_employer);
-    }
+    }// TODO: 2/27/2018 Copy paste from accountpageowner
 }
-@// TODO: 2/27/2018 Copy paste from accountpageowner
