@@ -13,6 +13,9 @@ public class QBUser {
     String education;
     int age;
     List<String> posts;
+    float numberOfRatings;
+    float totalStars;
+    List<Float> ratings;
 
     QBUser()
     {
@@ -22,6 +25,9 @@ public class QBUser {
         education = "";
         age = 0;
         posts = new ArrayList<>();
+        numberOfRatings = 0;
+        totalStars = 0;
+        ratings = new ArrayList<>();
     }
 
     QBUser(String email)
@@ -32,6 +38,9 @@ public class QBUser {
         education = "";
         age = 0;
         posts = new ArrayList<>();
+        numberOfRatings = 0;
+        totalStars = 0;
+        ratings = new ArrayList<>();
     }
 
     void setBio(String bio)
@@ -50,6 +59,12 @@ public class QBUser {
     }
 
     void addPost(String postName){this.posts.add(postName);}
+
+    void addRating(Float rating){
+        this.numberOfRatings++;
+        this.totalStars += rating;
+        this.ratings.add(rating);
+    }
 
     String getBio()
     {
@@ -77,4 +92,10 @@ public class QBUser {
     }
 
     List<String> getPosts(){return posts;}
+
+    float getNumberOfRatings() {return numberOfRatings; }
+
+    float getTotalStars() {return totalStars; }
+
+    List<Float> getRatings() {return ratings; }
 }

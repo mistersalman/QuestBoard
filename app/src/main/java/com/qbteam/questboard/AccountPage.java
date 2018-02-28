@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,10 +32,12 @@ public class AccountPage extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
+    float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
     Button editAcct, goHome;
     ImageView imageView;
+    RatingBar Ratings;
 
     Uri filePath, downloadUrl;
     FirebaseAuth mobileAuth;
@@ -165,6 +168,7 @@ public class AccountPage extends AppCompatActivity {
         Name = (TextView) findViewById(R.id.Name);
         Education = (TextView) findViewById(R.id.Education);
         Age= (TextView) findViewById(R.id.Age);
+        Ratings = (RatingBar) findViewById(R.id.ratingBar);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -182,6 +186,12 @@ public class AccountPage extends AppCompatActivity {
                 Name.setText(user.getName());
                 Education.setText(user.getEducation());
                 Bio.setText(user.getBio());
+                averageRating = user.getTotalStars() / user.getNumberOfRatings();
+                if(user.getNumberOfRatings() == 0)
+                {
+                    averageRating = (float)5;
+                }
+                Ratings.setRating(averageRating);
             }
 
             @Override
