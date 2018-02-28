@@ -74,7 +74,7 @@ public class AccountPageEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent(AccountPageEdit.this,
-                        AccountPage.class);
+                        AccountPageOwner.class);
                 startActivity(createIntent);
                 finish();
                 //Go to account management page
@@ -138,7 +138,7 @@ public class AccountPageEdit extends AppCompatActivity {
                     }
                 });
 //                Intent createIntent = new Intent(AccountPageEdit.this,
-//                        AccountPage.class);
+//                        AccountPageOwner.class);
 //                startActivity(createIntent);
 //                finish();
                 Toast.makeText(AccountPageEdit.this, "Info Updated!", Toast.LENGTH_LONG).show();

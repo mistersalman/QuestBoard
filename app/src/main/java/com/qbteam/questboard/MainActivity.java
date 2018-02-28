@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent(MainActivity.this,
-                        AccountPage.class);
+                        AccountPageOwner.class);
                 startActivity(createIntent);
                 //Go to account management page
             }

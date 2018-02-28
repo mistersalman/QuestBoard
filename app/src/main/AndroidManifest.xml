@@ -24,14 +24,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".AcctCreation" />
-        <activity android:name=".AccountPage" />
+        <activity android:name=".AccountPageOwner" />
         <activity android:name=".AccountPageEdit" />
         <activity android:name=".AcctLogin" />
         <activity android:name=".PostNewQuest" />
         <activity android:name=".ViewPostedQuestEmployer" />
         <activity android:name=".EditPostedQuest" />
         <activity android:name=".QuestList" />
-        <activity android:name=".ViewPostedQuestEmployee"></activity>
+        <activity android:name=".ViewPostedQuestEmployee" />
+        <activity android:name=".AccountPageEmployee" />
+        <activity android:name=".AccountPageEmployer"></activity>
     </application>
 
 </manifest>

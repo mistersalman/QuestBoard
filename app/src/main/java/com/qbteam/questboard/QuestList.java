@@ -65,7 +65,7 @@ public class QuestList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent(QuestList.this,
-                        AccountPage.class);
+                        AccountPageOwner.class);
                 startActivity(createIntent);
                 finish();
                 //Go to account management page

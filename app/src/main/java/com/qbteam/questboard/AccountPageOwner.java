@@ -27,7 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class AccountPage extends AppCompatActivity {
+public class AccountPageOwner extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST_CODE = 22;
     private static final int PDF_REQUEST_CODE = 23;
@@ -43,7 +43,7 @@ public class AccountPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_page);
+        setContentView(R.layout.activity_account_page_owner);
 
         editAcct = (Button) findViewById(R.id.editButton);
         goHome = (Button) findViewById(R.id.homeButton);
@@ -63,7 +63,7 @@ public class AccountPage extends AppCompatActivity {
         editAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createIntent = new Intent(AccountPage.this,
+                Intent createIntent = new Intent(AccountPageOwner.this,
                         AccountPageEdit.class);
                 startActivity(createIntent);
                 finish();
@@ -74,7 +74,7 @@ public class AccountPage extends AppCompatActivity {
         goHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createIntent = new Intent(AccountPage.this,
+                Intent createIntent = new Intent(AccountPageOwner.this,
                         MainActivity.class);
                 startActivity(createIntent);
                 finish();
@@ -192,3 +192,4 @@ public class AccountPage extends AppCompatActivity {
 
     }
 }
+@// TODO: 2/27/2018 Change home button to a back button 
