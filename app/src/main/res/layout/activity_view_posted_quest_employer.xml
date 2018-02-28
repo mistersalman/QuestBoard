@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qbteam.questboard.ViewPostedQuest">
+    tools:context="com.qbteam.questboard.ViewPostedQuestEmployer">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,16 +20,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <Button
+                    android:id="@+id/EditQuestButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <Button
+                    android:id="@+id/ViewApplicantsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@id/questTitleTextView1"
+                    android:text="View Applicants"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"/>
+
                 <TextView
                     android:id="@+id/questTitleTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_below="@+id/ViewApplicantsButton"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:gravity="left"
                     android:text="Title:"
                     android:textAllCaps="false"
@@ -227,26 +251,16 @@
                     android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/applyEditQuestButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/viewQuestGiverProfileButton"
-                    android:layout_marginTop="18dp"
-                    android:layout_toEndOf="@+id/questDescriptionTextView1"
-                    android:layout_toRightOf="@+id/questDescriptionTextView1"
-                    android:text="Edit"
-                    android:textAllCaps="false"
-                    android:textSize="20sp" />
-
-                <Button
                     android:id="@+id/backButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/viewQuestGiverProfileButton"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignStart="@+id/viewQuestGiverProfileButton"
-                    android:text="Back!" />
-
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Back"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
         </LinearLayout>

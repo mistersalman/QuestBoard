@@ -1,26 +1,16 @@
 package com.qbteam.questboard;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -97,7 +87,7 @@ public class QuestList extends AppCompatActivity {
         questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuest.class);
+                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuestEmployer.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("postID", idList.get(position));
                 Log.d("id list: ", idList.get(position));

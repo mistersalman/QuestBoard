@@ -64,7 +64,7 @@ public class EditPostedQuest extends AppCompatActivity {
                         databaseReference.child(postPath).child("tags").setValue(tags);
                         Toast.makeText(EditPostedQuest.this, "Info Updated!", Toast.LENGTH_LONG).show();
 
-                        Intent intentEdit = new Intent(EditPostedQuest.this, ViewPostedQuest.class);
+                        Intent intentEdit = new Intent(EditPostedQuest.this, ViewPostedQuestEmployer.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("postID", postID);
                         intentEdit.putExtras(bundle);

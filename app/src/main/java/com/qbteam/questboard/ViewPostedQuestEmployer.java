@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
-
-public class ViewPostedQuest extends AppCompatActivity {
+public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
     private Button applyEditQuestButton, backButton;
@@ -35,7 +30,7 @@ public class ViewPostedQuest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_posted_quest);
+        setContentView(R.layout.activity_view_posted_quest_employer);
 
         Intent intentBundle = getIntent();
         Bundle extrasBundle = intentBundle.getExtras();
@@ -69,7 +64,7 @@ public class ViewPostedQuest extends AppCompatActivity {
                             Log.d("postID: ", (postID.substring(6) + "/").replace("%40", "@"));
                             if(s.compareTo((postID.substring(6) + "/").replace("%40", "@")) == 0)
                             {
-                                Intent intentEdit = new Intent(ViewPostedQuest.this, EditPostedQuest.class);
+                                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, EditPostedQuest.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("postID", postID);
                                 intentEdit.putExtras(bundle);
@@ -78,7 +73,7 @@ public class ViewPostedQuest extends AppCompatActivity {
                             }
                             else
                             {
-                                Toast.makeText(ViewPostedQuest.this, "This isn't your post!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ViewPostedQuestEmployer.this, "This isn't your post!", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -94,7 +89,7 @@ public class ViewPostedQuest extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentEdit = new Intent(ViewPostedQuest.this, QuestList.class);
+                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, QuestList.class);
                 startActivity(intentEdit);
                 finish();
             }
