@@ -41,7 +41,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
             postID = extrasBundle.getString("postID", postID);
         }
 
-        applyEditQuestButton = (Button) findViewById(R.id.applyEditQuestButton);
+        applyEditQuestButton = (Button) findViewById(R.id.editQuestButton);
         backButton = (Button) findViewById(R.id.backButton);
 
         applyEditQuestButton.setOnClickListener(new View.OnClickListener() {

@@ -21,7 +21,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/EditQuestButton"
+                    android:id="@+id/editQuestButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -34,7 +34,7 @@
                     android:layout_marginLeft="10dp"/>
 
                 <Button
-                    android:id="@+id/ViewApplicantsButton"
+                    android:id="@+id/viewApplicantsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/ViewApplicantsButton"
+                    android:layout_below="@+id/viewApplicantsButton"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="left"
