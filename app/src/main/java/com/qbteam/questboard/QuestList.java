@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +36,7 @@ public class QuestList extends AppCompatActivity {
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     Button profile, newQuest;
     ListView questList;
+    ToggleButton toggleQuest;
 
     ArrayList<String> titles = new ArrayList<String>();;
     ArrayList<String> descriptions = new ArrayList<String>();;
@@ -38,14 +44,23 @@ public class QuestList extends AppCompatActivity {
 
     private SearchView questSearch;
     ArrayList<ArrayList<String>> dataBaseTags = new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> dataBaseToggleTags = new ArrayList<ArrayList<String>>();
     ArrayList<String> temp;
     ArrayList<String> titleList = new ArrayList();
     ArrayList<String> copyList = new ArrayList();
     ArrayList<String> idList = new ArrayList();
-    String tempString, tempSwap;
+    ArrayList<String> idTempList = new ArrayList<>();
+    ArrayList<String> copyIdList = new ArrayList();
+    List<String> userPostID = new ArrayList<>();
+    String tempString, tempSwap, tempName;
     int count, index, value;
     int max = 0;
     int[] matchList;
+    boolean toggle = false;
+
+    FirebaseAuth mobileAuth;
+    FirebaseUser currentUser;
+    QBUser user = new QBUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +68,7 @@ public class QuestList extends AppCompatActivity {
         setContentView(R.layout.quest_list);
 
         questList = (ListView) findViewById(R.id.itemList);
+        questSearch = (SearchView) findViewById(R.id.questSearch);
 
 
         /*
@@ -60,6 +76,7 @@ public class QuestList extends AppCompatActivity {
          */
         profile = (Button) findViewById(R.id.profile);
         newQuest = (Button) findViewById(R.id.newQuest);
+        toggleQuest = (ToggleButton) findViewById(R.id.toggleQuest);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,15 +106,13 @@ public class QuestList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent viewIntent = new Intent(QuestList.this, ViewPostedQuestEmployer.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("postID", idList.get(position));
-                Log.d("id list: ", idList.get(position));
+                bundle.putString("postID", copyIdList.get(position));
+                Log.d("id list: ", copyIdList.get(position));
                 viewIntent.putExtras(bundle);
                 startActivity(viewIntent);
                 finish();
             }
         });
-
-        questSearch = (SearchView) findViewById(R.id.questSearch);
 
         questSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -107,26 +122,55 @@ public class QuestList extends AppCompatActivity {
                 count = 0;
                 matchList = new int[dataBaseTags.size()];
                 copyList = new ArrayList();
+                copyIdList = new ArrayList();
 
-                for(int v = 0; v < titleList.size(); v++)
+                if(toggle)
                 {
-                    copyList.add(titleList.get(v));
-                }
-
-                for(int x = 0; x < dataBaseTags.size(); x++)
-                {
-                    for(int y = 0; y < dataBaseTags.get(x).size(); y++)
+                    for(int v = 0; v < titleList.size(); v++)
                     {
-                        for(int z = 0; z < searchTags.size(); z++)
+                        copyList.add(titleList.get(v));
+                        copyIdList.add(idTempList.get(v));
+                    }
+
+                    for(int x = 0; x < dataBaseToggleTags.size(); x++)
+                    {
+                        for(int y = 0; y < dataBaseToggleTags.get(x).size(); y++)
                         {
-                            if(dataBaseTags.get(x).get(y).equals(searchTags.get(z)))
+                            for(int z = 0; z < searchTags.size(); z++)
                             {
-                                count++;
+                                if(dataBaseToggleTags.get(x).get(y).equals(searchTags.get(z)))
+                                {
+                                    count++;
+                                }
                             }
                         }
+                        matchList[x] = count;
+                        count = 0;
                     }
-                    matchList[x] = count;
-                    count = 0;
+                }
+                else
+                {
+                    for(int v = 0; v < titles.size(); v++)
+                    {
+                        copyList.add(titles.get(v));
+                        copyIdList.add(idList.get(v));
+                    }
+
+                    for(int x = 0; x < dataBaseTags.size(); x++)
+                    {
+                        for(int y = 0; y < dataBaseTags.get(x).size(); y++)
+                        {
+                            for(int z = 0; z < searchTags.size(); z++)
+                            {
+                                if(dataBaseTags.get(x).get(y).equals(searchTags.get(z)))
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        matchList[x] = count;
+                        count = 0;
+                    }
                 }
 
                 for(int t = 0; t < titleList.size(); t++)
@@ -144,6 +188,10 @@ public class QuestList extends AppCompatActivity {
                     copyList.set(t, copyList.get(index));
                     copyList.set(index, tempSwap);
 
+                    tempSwap = copyIdList.get(t);
+                    copyIdList.set(t, copyIdList.get(index));
+                    copyIdList.set(index, tempSwap);
+
                     count = matchList[t];
                     matchList[t] = matchList[index];
                     matchList[index] = count;
@@ -156,15 +204,19 @@ public class QuestList extends AppCompatActivity {
                     if(matchList[i] == 0)
                     {
                         copyList.remove(i);
+                        copyIdList.remove(i);
                     }
                 }
                 if(matchList[0] == 0)
                 {
                     copyList.remove(0);
+                    copyIdList.remove(0);
                 }
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, copyList);
                 questList.setAdapter(arrayAdapter);
+
+                questSearch.clearFocus();
                 return false;
             }
 
@@ -173,6 +225,39 @@ public class QuestList extends AppCompatActivity {
                 return false;
             }
         });
+
+        toggleQuest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    copyIdList = new ArrayList<>();
+                    for(int v = 0; v < idTempList.size(); v++)
+                    {
+                        copyIdList.add(idTempList.get(v));
+                    }
+                    toggle = true;
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titleList);
+                    questList.setAdapter(arrayAdapter);
+                    questSearch.setQuery("", false);
+                    questSearch.clearFocus();
+                }
+                else
+                {
+                    copyIdList = new ArrayList<>();
+                    for(int v = 0; v < idList.size(); v++)
+                    {
+                        copyIdList.add(idList.get(v));
+                    }
+                    toggle = false;
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titles);
+                    questList.setAdapter(arrayAdapter);
+                    questSearch.setQuery("", false);
+                    questSearch.clearFocus();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -190,6 +275,24 @@ public class QuestList extends AppCompatActivity {
         questList = (ListView) findViewById(R.id.itemList);
         final String path = "posts/";
 
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+        String pathUser = "users/" + currentUser.getUid().toString() + "/";
+
+        final FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReferenceUser = databaseUser.getReference();
+        databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(QBUser.class);
+                userPostID = user.getPosts();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -203,6 +306,7 @@ public class QuestList extends AppCompatActivity {
                     String key = (String) ds.getRef().toString().substring(40);
 
                     idList.add(key);
+                    copyIdList.add(key);
 
                     //titles.add(key);
 
@@ -215,8 +319,17 @@ public class QuestList extends AppCompatActivity {
                         temp.add(tempString);
                     }
                     tempString = ds.child("/title").getValue(String.class);
-                    titleList.add(tempString);
+                    //titleList.add(tempString);
                     dataBaseTags.add(temp);
+                    for(int x = 0; x < userPostID.size(); x++)
+                    {
+                        if(userPostID.get(x).equals(ds.getKey()+"/"))
+                        {
+                            titleList.add(tempString);
+                            dataBaseToggleTags.add(temp);
+                            idTempList.add(key);
+                        }
+                    }
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titles);
                 questList.setAdapter(arrayAdapter);
