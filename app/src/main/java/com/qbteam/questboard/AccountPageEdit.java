@@ -231,7 +231,7 @@ public class AccountPageEdit extends AppCompatActivity {
             //Gets path of image
             filePath = data.getData();
             //Set destination
-            StorageReference fileRef = storageRef.child(currentUser.getEmail()+"/resume.pdf");
+            StorageReference fileRef = storageRef.child(currentUser.getEmail()+"/" + currentUser.getEmail()+"resume.pdf");
             //Uploads the file
             UploadTask uploadTask = fileRef.putFile(filePath);
             //Runs depending on upload success or failure, current ain't doing anything
