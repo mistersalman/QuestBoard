@@ -1,12 +1,18 @@
 package com.qbteam.questboard;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +50,9 @@ public class AccountPageEdit extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener locationListener;
+    String latitude, longitude;
+
+    private static final int REQUEST_LOCATION = 1;
 
     Uri filePath, downloadUrl;
     FirebaseAuth mobileAuth;
@@ -118,7 +127,14 @@ public class AccountPageEdit extends AppCompatActivity {
         updateLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ActivityCompat.requestPermissions(AccountPageEdit.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
 
+                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    getLocation();
+                }
             }
         });
 
@@ -268,5 +284,72 @@ public class AccountPageEdit extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getLocation()
+    {
+        if (ActivityCompat.checkSelfPermission(AccountPageEdit.this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (AccountPageEdit.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(AccountPageEdit.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+
+        } else {
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
+
+            if (location != null) {
+                double lat = location.getLatitude();
+                double lon = location.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(lon);
+
+                Log.d("lat and lon: ", latitude + " " + longitude);
+
+            } else  if (location1 != null) {
+                double lat = location1.getLatitude();
+                double lon = location1.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(lon);
+
+                Log.d("lat and lon: ", latitude + " " + longitude);
+
+
+            } else  if (location2 != null) {
+                double lat = location2.getLatitude();
+                double lon = location2.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(lon);
+
+                Log.d("lat and lon: ", latitude + " " + longitude);
+
+            }else{
+
+                Toast.makeText(this,"Can't get location.",Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    private void buildAlertMessageNoGps()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please Turn ON your GPS Connection")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 }
