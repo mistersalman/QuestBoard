@@ -67,7 +67,7 @@ public class PostNewQuest extends AppCompatActivity {
                     System.out.println(postID);
 
                     final QBPost post = new QBPost(questTitleEditText.getText().toString(), questDescriptionEditText.getText().toString(),
-                            requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags);
+                            requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags, mobileAuth.getUid().toString());
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference databaseReference = database.getReference();
                     final String postPath = "posts/" + postID + "/";
