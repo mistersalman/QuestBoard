@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
-    private Button viewApplicantsButton, applyEditQuestButton, backButton;
+    private Button viewApplicantsButton, applyEditQuestButton, closeJobButton, backButton;
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
 
@@ -41,8 +41,12 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
             postID = extrasBundle.getString("postID", postID);
         }
 
+        Log.d("id view: ", postID);
+        final String postPath = postID.replace("%40", "@");
+
         viewApplicantsButton = (Button) findViewById(R.id.viewApplicantsButton);
         applyEditQuestButton = (Button) findViewById(R.id.editQuestButton);
+        closeJobButton = (Button) findViewById(R.id.closeJobButton);
         backButton = (Button) findViewById(R.id.backButton);
 
         viewApplicantsButton.setOnClickListener(new View.OnClickListener() {
@@ -61,35 +65,27 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         applyEditQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobileAuth = FirebaseAuth.getInstance();
-                currentUser = mobileAuth.getCurrentUser();
-                String path = "users/" + currentUser.getUid().toString() + "/";
+                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, EditPostedQuest.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", postID);
+                intentEdit.putExtras(bundle);
+                startActivity(intentEdit);
+                finish();
+            }
+        });
 
+        closeJobButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = database.getReference();
-                databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+                final DatabaseReference databaseReference = database.getReference();
+                databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        QBUser user = dataSnapshot.getValue(QBUser.class);
                         Log.d("any key name", dataSnapshot.toString());
-                        for(String s : user.getPosts())
-                        {
-                            Log.d("user posts: ", s);
-                            Log.d("postID: ", (postID.substring(6) + "/").replace("%40", "@"));
-                            if(s.compareTo((postID.substring(6) + "/").replace("%40", "@")) == 0)
-                            {
-                                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, EditPostedQuest.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("postID", postID);
-                                intentEdit.putExtras(bundle);
-                                startActivity(intentEdit);
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(ViewPostedQuestEmployer.this, "This isn't your post!", Toast.LENGTH_LONG).show();
-                            }
-                        }
+                        databaseReference.child(postPath).child("completed").setValue(true);
+
+                        Toast.makeText(ViewPostedQuestEmployer.this, "You have closed the quest!", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -123,10 +119,10 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         Bundle extrasBundle = intentBundle.getExtras();
 
         //TODO Create corresponding bundle in QuestList
-    if(extrasBundle != null)
-    {
-        postID = extrasBundle.getString("postID", postID);
-    }
+        if(extrasBundle != null)
+        {
+            postID = extrasBundle.getString("postID", postID);
+        }
         //TODO get values from DB through post ID
         Log.d("id view: ", postID);
         String postPath = postID.replace("%40", "@");
