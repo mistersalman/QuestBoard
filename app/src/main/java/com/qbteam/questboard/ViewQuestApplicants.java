@@ -26,6 +26,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
     Button back;
 
     List<String> applicantList = new ArrayList();
+    List<String> tempList = new ArrayList();
 
     ArrayList<String> idList = new ArrayList();
     ArrayList<String> copyIdList = new ArrayList();
@@ -92,7 +93,28 @@ public class ViewQuestApplicants extends AppCompatActivity {
 
                 QBPost post = dataSnapshot.getValue(QBPost.class);
                 //Log.d("applicant shit", post.getTitle());
-                applicantList = post.getApplicants();
+                tempList = post.getApplicants();
+
+                for(int i = 0; i < tempList.size(); i++)
+                {
+                    String pathUser = "users/" + tempList.get(i) + "/";
+
+                    final FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReferenceUser = databaseUser.getReference();
+                    databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            user = dataSnapshot.getValue(QBUser.class);
+                            applicantList.add(user.getName());
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
                 applist.setAdapter(arrayAdapter);
             }

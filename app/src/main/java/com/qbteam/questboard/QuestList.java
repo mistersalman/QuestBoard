@@ -329,6 +329,7 @@ public class QuestList extends AppCompatActivity {
                     idList.add(key);
                     copyIdList.add(key);
 
+
                     titles.add(ds.child("/title").getValue(String.class));
 
                     temp = new ArrayList();
@@ -337,8 +338,12 @@ public class QuestList extends AppCompatActivity {
                         tempString = j.getValue(String.class);
                         temp.add(tempString);
                     }
+
+
                     tempString = ds.child("/title").getValue(String.class);
                     //titleList.add(tempString);
+
+                    //I believe this is the tags thing, so not my business
                     dataBaseTags.add(temp);
                     for(int x = 0; x < userPostID.size(); x++)
                     {
@@ -350,6 +355,7 @@ public class QuestList extends AppCompatActivity {
                         }
                     }
                 }
+                //this is where we dump all the things in "titles" into the array adapter. The array adapter is what actually shows up
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(QuestList.this, android.R.layout.simple_list_item_1, titles);
                 questList.setAdapter(arrayAdapter);
             }
