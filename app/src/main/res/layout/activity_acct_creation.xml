@@ -8,14 +8,19 @@
 
     <TextView
         android:id="@+id/signUpMessage"
-        android:layout_width="123dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
         android:text="Sign Up"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="32sp"
+        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,12 +28,14 @@
         android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Enter Email Address"
         android:inputType="textWebEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/confirmPass"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpMessage" />
 
@@ -36,50 +43,55 @@
         android:id="@+id/inputPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/confirmPass"
+        app:layout_constraintEnd_toEndOf="@+id/inputEmail"
         app:layout_constraintStart_toStartOf="@+id/inputEmail"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
-        app:layout_constraintVertical_bias="0.625" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
-        android:text="Sign Me Up!"
-        android:textAllCaps="false"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Submit"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/returnButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/confirmPass"
+        app:layout_constraintStart_toStartOf="@+id/confirmPass"
         app:layout_constraintTop_toBottomOf="@+id/confirmPass" />
 
     <EditText
         android:id="@+id/confirmPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+        app:layout_constraintEnd_toEndOf="@+id/inputPass"
         app:layout_constraintStart_toStartOf="@+id/inputPass"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
     <Button
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Back"
-        android:textAllCaps="false"
         android:textAlignment="center"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signUpButton"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
