@@ -1,8 +1,16 @@
 package com.qbteam.questboard;
 
+import android.app.DownloadManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -24,9 +33,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AccountPageOwner extends AppCompatActivity {
 
@@ -35,7 +48,7 @@ public class AccountPageOwner extends AppCompatActivity {
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
-    Button editAcct, goHome;
+    Button editAcct, goHome, downloadResume;
     ImageView imageView;
     RatingBar Ratings;
 
@@ -50,6 +63,7 @@ public class AccountPageOwner extends AppCompatActivity {
 
         editAcct = (Button) findViewById(R.id.editButton);
         goHome = (Button) findViewById(R.id.homeButton);
+        downloadResume = (Button) findViewById(R.id.downloadResume);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -83,6 +97,25 @@ public class AccountPageOwner extends AppCompatActivity {
                 finish();
                 //Go to account management page
 
+            }
+        });
+
+        downloadResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StorageReference resumePath = storageRef.child(currentUser.getEmail()+"/" + currentUser.getEmail()+"resume.pdf");
+                resumePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(i);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AccountPageOwner.this, "Resume does not exist", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
