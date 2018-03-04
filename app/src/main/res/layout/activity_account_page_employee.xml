@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="@+id/downloadResume" />
 
     <Button
-        android:id="@+id/homeButton"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
@@ -69,7 +69,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Inputted bio"
-        app:layout_constraintBottom_toTopOf="@+id/homeButton"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -143,7 +143,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:text="Download"
-        app:layout_constraintBottom_toBottomOf="@+id/homeButton"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAllCaps="false"/>
 
