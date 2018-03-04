@@ -54,10 +54,26 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         QBPost post = dataSnapshot.getValue(QBPost.class);
                         mobileAuth = FirebaseAuth.getInstance();
+                        boolean appliedTo = false;
                         Log.d("applicant id", mobileAuth.getUid().toString());
-                        post.applicantIDs.add(mobileAuth.getUid().toString());
-                        databaseReference.child(postPath).setValue(post);
-                        Toast.makeText(ViewPostedQuestEmployee.this, "You have applied to the quest!", Toast.LENGTH_LONG).show();
+                        for(String appID : post.applicantIDs)
+                        {
+                            if(mobileAuth.getUid().toString().compareTo(appID) == 0)
+                            {
+                                appliedTo = true;
+                            }
+                        }
+                        if(!appliedTo)
+                        {
+                            post.applicantIDs.add(mobileAuth.getUid().toString());
+                            databaseReference.child(postPath).setValue(post);
+                            Toast.makeText(ViewPostedQuestEmployee.this, "You have applied to the quest!", Toast.LENGTH_LONG).show();
+                            appliedTo = true;
+                        }
+                        else
+                        {
+                            Toast.makeText(ViewPostedQuestEmployee.this, "You have already applied to this quest!", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -71,7 +87,25 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
         viewQuestGiverProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = database.getReference();
+                databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        QBPost post = dataSnapshot.getValue(QBPost.class);
+                        Intent intentEdit = new Intent(ViewPostedQuestEmployee.this, AccountPageEmployee.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("employerID", post.getPosterID());
+                        intentEdit.putExtras(bundle);
+                        startActivity(intentEdit);
+                        finish();
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
