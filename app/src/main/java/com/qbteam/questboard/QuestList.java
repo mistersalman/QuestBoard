@@ -34,7 +34,7 @@ import java.util.List;
 
 public class QuestList extends AppCompatActivity {
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    Button newQuest;
+    Button newQuest, backButton;
     ListView questList;
     ToggleButton toggleQuest;
 
@@ -67,15 +67,22 @@ public class QuestList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quest_list);
 
+        backButton = (Button) findViewById(R.id.backButton);
         questList = (ListView) findViewById(R.id.itemList);
         questSearch = (SearchView) findViewById(R.id.questSearch);
-
-
+        
         /*
         These are all the buttons, you should probably be able to see that pretty easy
          */
         newQuest = (Button) findViewById(R.id.newQuest);
         toggleQuest = (ToggleButton) findViewById(R.id.toggleQuest);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuestList.super.onBackPressed();
+            }
+        });
 
         newQuest.setOnClickListener(new View.OnClickListener() {
             @Override

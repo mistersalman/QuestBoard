@@ -97,9 +97,10 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, QuestList.class);
-                startActivity(intentEdit);
-                finish();
+//                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, QuestList.class);
+//                startActivity(intentEdit);
+//                finish();
+                ViewPostedQuestEmployer.super.onBackPressed();
             }
         });
     }

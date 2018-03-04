@@ -29,7 +29,7 @@ import java.util.List;
 public class PostNewQuest extends AppCompatActivity {
 
     private EditText questTitleEditText, questDescriptionEditText, requirementsEditText, rewardsEditText, tagsEditText;
-    private Button postQuestButton;
+    private Button postQuestButton, backButton;
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
 
@@ -39,6 +39,14 @@ public class PostNewQuest extends AppCompatActivity {
         setContentView(R.layout.activity_post_new_quest);
 
         postQuestButton = (Button) findViewById(R.id.postQuestButton);
+        backButton = (Button) findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PostNewQuest.super.onBackPressed();
+            }
+        });
 
         postQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override

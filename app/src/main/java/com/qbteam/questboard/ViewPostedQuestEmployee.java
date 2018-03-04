@@ -112,9 +112,10 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentEdit = new Intent(ViewPostedQuestEmployee.this, QuestList.class);
-                startActivity(intentEdit);
-                finish();
+//                Intent intentEdit = new Intent(ViewPostedQuestEmployee.this, QuestList.class);
+//                startActivity(intentEdit);
+//                finish();
+                ViewPostedQuestEmployee.super.onBackPressed();
             }
         });
     }// TODO: 2/27/2018 Copy paste from viewpostedquestemployer
