@@ -58,7 +58,8 @@
         android:layout_marginLeft="36dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAllCaps="false"/>
 
     <TextView
         android:id="@+id/Bio"
@@ -81,7 +82,8 @@
         android:layout_marginRight="16dp"
         android:text="Contact"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Name" />
+        app:layout_constraintTop_toTopOf="@+id/Name"
+        android:textAllCaps="false"/>
 
     <TextView
         android:id="@+id/textView9"
@@ -142,7 +144,8 @@
         android:layout_marginRight="36dp"
         android:text="Download"
         app:layout_constraintBottom_toBottomOf="@+id/homeButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/rateButton"
@@ -150,7 +153,8 @@
         android:layout_height="wrap_content"
         android:text="Rate"
         app:layout_constraintEnd_toEndOf="@+id/contactButton"
-        app:layout_constraintTop_toBottomOf="@+id/contactButton" />
+        app:layout_constraintTop_toBottomOf="@+id/contactButton"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/hireButton"
@@ -158,6 +162,7 @@
         android:layout_height="wrap_content"
         android:text="Hire"
         app:layout_constraintEnd_toEndOf="@+id/contactButton"
-        app:layout_constraintTop_toBottomOf="@+id/rateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/rateButton"
+        android:textAllCaps="false"/>
 
 </android.support.constraint.ConstraintLayout>
