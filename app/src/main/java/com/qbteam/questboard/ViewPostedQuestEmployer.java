@@ -21,8 +21,6 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
     private Button viewApplicantsButton, applyEditQuestButton, closeJobButton, backButton;
-    FirebaseAuth mobileAuth;
-    FirebaseUser currentUser;
 
     String postID;
 
