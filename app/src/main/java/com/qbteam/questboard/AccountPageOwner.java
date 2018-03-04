@@ -48,7 +48,7 @@ public class AccountPageOwner extends AppCompatActivity {
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
-    Button editAcct, goHome, downloadResume;
+    Button editAcct, goBack, downloadResume;
     ImageView imageView;
     RatingBar Ratings;
 
@@ -62,7 +62,7 @@ public class AccountPageOwner extends AppCompatActivity {
         setContentView(R.layout.activity_account_page_owner);
 
         editAcct = (Button) findViewById(R.id.editButton);
-        goHome = (Button) findViewById(R.id.homeButton);
+        goBack = (Button) findViewById(R.id.backButton);
         downloadResume = (Button) findViewById(R.id.downloadResume);
 
         mobileAuth = FirebaseAuth.getInstance();
@@ -88,15 +88,15 @@ public class AccountPageOwner extends AppCompatActivity {
             }
         });
 
-        goHome.setOnClickListener(new View.OnClickListener() {
+        goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createIntent = new Intent(AccountPageOwner.this,
-                        MainActivity.class);
-                startActivity(createIntent);
-                finish();
+//                Intent createIntent = new Intent(AccountPageOwner.this,
+//                        MainActivity.class);
+//                startActivity(createIntent);
+//                finish();
+                AccountPageOwner.super.onBackPressed();
                 //Go to account management page
-
             }
         });
 
@@ -233,5 +233,5 @@ public class AccountPageOwner extends AppCompatActivity {
             }
         });
 
-    }//TODO: 2/27/2018 Change home button to a back button
+    }
 }
