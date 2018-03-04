@@ -190,7 +190,7 @@
                     android:layout_below="@+id/tagsEditText"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:text="Update Quest!"
+                    android:text="Update Quest"
                     android:textAllCaps="false"
                     android:textSize="20sp"/>
 
