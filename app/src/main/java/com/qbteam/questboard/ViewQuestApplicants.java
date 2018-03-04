@@ -87,16 +87,15 @@ public class ViewQuestApplicants extends AppCompatActivity {
         //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
-        databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(postPath);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 QBPost post = dataSnapshot.getValue(QBPost.class);
-                //Log.d("applicant shit", post.getTitle());
                 tempList = post.getApplicants();
 
-                for(int i = 0; i < tempList.size(); i++)
-                {
+                for (int i = 0; i < tempList.size(); i++) {
                     String pathUser = "users/" + tempList.get(i) + "/";
 
                     final FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
@@ -106,6 +105,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             user = dataSnapshot.getValue(QBUser.class);
                             applicantList.add(user.getName());
+                            //Log.d("applicant shit", applicantList.get(0));
                         }
 
                         @Override
@@ -113,8 +113,8 @@ public class ViewQuestApplicants extends AppCompatActivity {
 
                         }
                     });
-                }
 
+                }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
                 applist.setAdapter(arrayAdapter);
             }
