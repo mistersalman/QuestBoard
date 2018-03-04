@@ -47,6 +47,16 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         closeJobButton = (Button) findViewById(R.id.closeJobButton);
         backButton = (Button) findViewById(R.id.backButton);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createIntent = new Intent(ViewPostedQuestEmployer.this,
+                        QuestList.class);
+                startActivity(createIntent);
+//                ViewPostedQuestEmployee.super.onBackPressed();
+            }
+        });
+
         viewApplicantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,16 +101,6 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
 
                     }
                 });
-            }
-        });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, QuestList.class);
-//                startActivity(intentEdit);
-//                finish();
-                ViewPostedQuestEmployer.super.onBackPressed();
             }
         });
     }

@@ -70,7 +70,7 @@ public class QuestList extends AppCompatActivity {
         backButton = (Button) findViewById(R.id.backButton);
         questList = (ListView) findViewById(R.id.itemList);
         questSearch = (SearchView) findViewById(R.id.questSearch);
-        
+
         /*
         These are all the buttons, you should probably be able to see that pretty easy
          */
@@ -79,8 +79,11 @@ public class QuestList extends AppCompatActivity {
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                QuestList.super.onBackPressed();
+            public void onClick(View v) {
+                Intent createIntent = new Intent(QuestList.this,
+                        MainActivity.class);
+                startActivity(createIntent);
+//                ViewPostedQuestEmployee.super.onBackPressed();
             }
         });
 
