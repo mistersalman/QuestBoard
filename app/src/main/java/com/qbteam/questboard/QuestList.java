@@ -34,7 +34,7 @@ import java.util.List;
 
 public class QuestList extends AppCompatActivity {
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    Button profile, newQuest;
+    Button newQuest;
     ListView questList;
     ToggleButton toggleQuest;
 
@@ -74,20 +74,8 @@ public class QuestList extends AppCompatActivity {
         /*
         These are all the buttons, you should probably be able to see that pretty easy
          */
-        profile = (Button) findViewById(R.id.profile);
         newQuest = (Button) findViewById(R.id.newQuest);
         toggleQuest = (ToggleButton) findViewById(R.id.toggleQuest);
-
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createIntent = new Intent(QuestList.this,
-                        AccountPageOwner.class);
-                startActivity(createIntent);
-                finish();
-                //Go to account management page
-            }
-        });
 
         newQuest.setOnClickListener(new View.OnClickListener() {
             @Override

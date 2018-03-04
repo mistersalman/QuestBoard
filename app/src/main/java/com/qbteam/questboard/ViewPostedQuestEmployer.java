@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
-    private Button applyEditQuestButton, backButton;
+    private Button viewApplicantsButton, applyEditQuestButton, backButton;
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
 
@@ -41,8 +41,22 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
             postID = extrasBundle.getString("postID", postID);
         }
 
+        viewApplicantsButton = (Button) findViewById(R.id.viewApplicantsButton);
         applyEditQuestButton = (Button) findViewById(R.id.editQuestButton);
         backButton = (Button) findViewById(R.id.backButton);
+
+        viewApplicantsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewIntent = new Intent(ViewPostedQuestEmployer.this, ViewQuestApplicants.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", postID);
+                Log.d("PostID", postID);
+                viewIntent.putExtras(bundle);
+                startActivity(viewIntent);
+                finish();
+            }
+        });
 
         applyEditQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
