@@ -10,42 +10,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true">
 
-        <RadioButton
-            android:id="@+id/oneStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="One Star"
-            />
-
-        <RadioButton
-            android:id="@+id/twoStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="Two Stars" />
-
-        <RadioButton
-            android:id="@+id/threeStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="Three Stars" />
-
-        <RadioButton
-            android:id="@+id/fourStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="Four Stars" />
-
-        <RadioButton
-            android:id="@+id/fiveStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="Five Stars" />
-
     </RadioGroup>
 
     <Button
@@ -55,6 +19,14 @@
         android:layout_below="@+id/radioGroup"
         android:layout_centerHorizontal="true"
         android:text="Submit" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="91dp" />
 
 
 </RelativeLayout>
