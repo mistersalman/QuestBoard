@@ -8,21 +8,17 @@
 
     <TextView
         android:id="@+id/welcomeMsg"
-        android:layout_width="271dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="234dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:text="Welcome to QuestBoard!"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/signinButton"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,14 +26,14 @@
         android:id="@+id/signinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="135dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Sign In"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeMsg" />
+        app:layout_constraintEnd_toEndOf="@+id/inputPass"
+        app:layout_constraintStart_toStartOf="@+id/inputPass"
+        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
     <Button
         android:id="@+id/signupButton"
@@ -54,7 +50,9 @@
         android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="Enter Email Address"
         android:inputType="textPersonName"
@@ -67,12 +65,11 @@
         android:id="@+id/inputPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="249dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="textPassword"
         android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/inputEmail"
         app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
@@ -80,13 +77,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="Don't have an account?"
         app:layout_constraintBottom_toTopOf="@+id/signupButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/signupButton"
+        app:layout_constraintStart_toStartOf="@+id/signupButton" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

@@ -3,17 +3,20 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/radioGroup">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <RadioButton
             android:id="@+id/oneStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="One Star" />
+            android:text="One Star"
+            />
 
         <RadioButton
             android:id="@+id/twoStars"
@@ -42,20 +45,16 @@
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
             android:text="Five Stars" />
+
     </RadioGroup>
 
     <Button
-        android:id="@+id/okButton"
+        android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/radioGroup"
-        android:layout_marginLeft="48dp"
-        android:layout_marginStart="48dp"
-        android:baselineAligned="false"
-        android:gravity="center"
-        android:text="Ok" />
+        android:layout_centerHorizontal="true"
+        android:text="Submit" />
 
 
 </RelativeLayout>
