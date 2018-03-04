@@ -45,7 +45,7 @@ public class AccountPageEdit extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     EditText Bio, Name, Education, Age;
-    Button viewAcct, changePicture, uploadResume, updateLocation, updateButton;
+    Button changePicture, uploadResume, updateLocation, updateButton;
     ImageView imageView;
 
     LocationManager locationManager;
@@ -68,7 +68,6 @@ public class AccountPageEdit extends AppCompatActivity {
         Education = (EditText) findViewById(R.id.Education);
         Age = (EditText) findViewById(R.id.Age);
 
-        viewAcct = (Button) findViewById(R.id.viewButton);
         changePicture = (Button) findViewById(R.id.changePicture);
         uploadResume = (Button) findViewById(R.id.homeButton);
         updateLocation = (Button) findViewById(R.id.updateLocation);
@@ -85,18 +84,6 @@ public class AccountPageEdit extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(imageView);
-
-        viewAcct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createIntent = new Intent(AccountPageEdit.this,
-                        AccountPageOwner.class);
-                startActivity(createIntent);
-                finish();
-                //Go to account management page
-            }
-        });
-
 
         changePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +159,11 @@ public class AccountPageEdit extends AppCompatActivity {
 //                startActivity(createIntent);
 //                finish();
                 Toast.makeText(AccountPageEdit.this, "Info Updated!", Toast.LENGTH_LONG).show();
+                //Go to account management page
+                Intent createIntent = new Intent(AccountPageEdit.this,
+                        AccountPageOwner.class);
+                startActivity(createIntent);
+                finish();
                 //Go to account management page
 
             }

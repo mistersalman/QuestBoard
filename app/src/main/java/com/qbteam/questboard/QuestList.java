@@ -103,14 +103,42 @@ public class QuestList extends AppCompatActivity {
 
         questList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent viewIntent = new Intent(QuestList.this, ViewPostedQuestEmployer.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("postID", copyIdList.get(position));
-                Log.d("id list: ", copyIdList.get(position));
-                viewIntent.putExtras(bundle);
-                startActivity(viewIntent);
-                finish();
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                Log.d("id view: ", copyIdList.get(position).replace("%40", "@"));
+                String postPath = copyIdList.get(position).replace("%40", "@");
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = database.getReference();
+                databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        QBPost post = dataSnapshot.getValue(QBPost.class);
+                        Log.d("values post object", dataSnapshot.toString());
+                        Log.d("OP ID", post.getPosterID());
+                        if(post.getPosterID().compareTo(mobileAuth.getUid().toString()) == 0)
+                        {
+                            Intent viewIntent = new Intent(QuestList.this, ViewPostedQuestEmployer.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("postID", copyIdList.get(position));
+                            viewIntent.putExtras(bundle);
+                            startActivity(viewIntent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent viewIntent = new Intent(QuestList.this, ViewPostedQuestEmployee.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("postID", copyIdList.get(position));
+                            viewIntent.putExtras(bundle);
+                            startActivity(viewIntent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -294,21 +322,17 @@ public class QuestList extends AppCompatActivity {
             }
         });
 
-        //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
         databaseReference.child(path);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //I believe this is the way to iterate through the children on the path of Posts, but I could very well have done this wrong
                 for (DataSnapshot ds : dataSnapshot.child(path).getChildren()) {
                     String key = (String) ds.getRef().toString().substring(40);
 
                     idList.add(key);
                     copyIdList.add(key);
-
-                    //titles.add(key);
 
                     titles.add(ds.child("/title").getValue(String.class));
 
