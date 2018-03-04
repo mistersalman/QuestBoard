@@ -33,7 +33,8 @@
         <activity android:name=".QuestList" />
         <activity android:name=".ViewPostedQuestEmployee" />
         <activity android:name=".AccountPageEmployee" />
-        <activity android:name=".AccountPageEmployer"></activity>
+        <activity android:name=".AccountPageEmployer" />
+        <activity android:name=".ViewQuestApplicants"></activity>
     </application>
 
 </manifest>
