@@ -44,6 +44,16 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
         viewQuestGiverProfileButton = (Button) findViewById(R.id.viewQuestGiverProfileButton);
         backButton = (Button) findViewById(R.id.backButton);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createIntent = new Intent(ViewPostedQuestEmployee.this,
+                        QuestList.class);
+                startActivity(createIntent);
+//                ViewPostedQuestEmployee.super.onBackPressed();
+            }
+        });
+
         applyQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,16 +116,6 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
 
                     }
                 });
-            }
-        });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intentEdit = new Intent(ViewPostedQuestEmployee.this, QuestList.class);
-//                startActivity(intentEdit);
-//                finish();
-                ViewPostedQuestEmployee.super.onBackPressed();
             }
         });
     }// TODO: 2/27/2018 Copy paste from viewpostedquestemployer
