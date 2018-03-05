@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -28,10 +29,6 @@ public class ViewQuestApplicants extends AppCompatActivity {
     ArrayList<String> applicantList = new ArrayList<String>();
     ArrayList<String> tempList = new ArrayList<String>();
 
-    ArrayList<String> idList = new ArrayList<String>();
-    ArrayList<String> copyIdList = new ArrayList<String>();
-    ArrayList<String> userPostID = new ArrayList<String>();
-
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
     String postID;
@@ -52,6 +49,19 @@ public class ViewQuestApplicants extends AppCompatActivity {
 
         applist = (ListView) findViewById(R.id.applicantList);
         back = (Button) findViewById(R.id.backButton);
+
+        applist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                Log.d("id view: ", tempList.get(position));
+                Intent viewIntent = new Intent(ViewQuestApplicants.this, AccountPageEmployer.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", tempList.get(position));
+                viewIntent.putExtras(bundle);
+                startActivity(viewIntent);
+                finish();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
