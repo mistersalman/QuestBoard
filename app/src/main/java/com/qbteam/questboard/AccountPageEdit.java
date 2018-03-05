@@ -38,6 +38,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import static android.location.LocationManager.GPS_PROVIDER;
+
 
 public class AccountPageEdit extends AppCompatActivity {
 
@@ -50,6 +52,7 @@ public class AccountPageEdit extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener locationListener;
+    Location l;
     String latitude, longitude;
 
     private static final int REQUEST_LOCATION = 1;
@@ -116,12 +119,9 @@ public class AccountPageEdit extends AppCompatActivity {
             public void onClick(View view) {
                 ActivityCompat.requestPermissions(AccountPageEdit.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    buildAlertMessageNoGps();
-
-                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    getLocation();
-                }
+                l = new Location(GPS_PROVIDER);
+                Log.d("Latitude", Double.toString(l.getLatitude()));
+                Log.d("Longitude", Double.toString(l.getLongitude()));
             }
         });
 
@@ -276,72 +276,5 @@ public class AccountPageEdit extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void getLocation()
-    {
-        if (ActivityCompat.checkSelfPermission(AccountPageEdit.this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (AccountPageEdit.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(AccountPageEdit.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
-        } else {
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
-
-            if (location != null) {
-                double lat = location.getLatitude();
-                double lon = location.getLongitude();
-                latitude = String.valueOf(lat);
-                longitude = String.valueOf(lon);
-
-                Log.d("lat and lon: ", latitude + " " + longitude);
-
-            } else  if (location1 != null) {
-                double lat = location1.getLatitude();
-                double lon = location1.getLongitude();
-                latitude = String.valueOf(lat);
-                longitude = String.valueOf(lon);
-
-                Log.d("lat and lon: ", latitude + " " + longitude);
-
-
-            } else  if (location2 != null) {
-                double lat = location2.getLatitude();
-                double lon = location2.getLongitude();
-                latitude = String.valueOf(lat);
-                longitude = String.valueOf(lon);
-
-                Log.d("lat and lon: ", latitude + " " + longitude);
-
-            }else{
-
-                Toast.makeText(this,"Can't get location.",Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }
-
-    private void buildAlertMessageNoGps()
-    {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Please Turn ON your GPS Connection")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
-                    }
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
     }
 }
