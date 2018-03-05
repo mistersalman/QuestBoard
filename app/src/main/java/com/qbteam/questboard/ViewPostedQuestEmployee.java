@@ -108,7 +108,7 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
                         bundle.putString("employerID", post.getPosterID());
                         intentEdit.putExtras(bundle);
                         startActivity(intentEdit);
-                        finish();
+//                        finish();
                     }
 
                     @Override

@@ -89,7 +89,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                tempList = (ArrayList<String>)dataSnapshot.child("/applicants/").getValue();
+                tempList = (ArrayList<String>)dataSnapshot.child("/applicantIDs/").getValue();
 
                 for (int i = 0; i < tempList.size(); i++)
                 {
@@ -102,7 +102,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot)
                         {
                             user = dataSnapshot.getValue(QBUser.class);
-                            applicantList.add(user.getName());
+                            applicantList.add(user != null ?  user.getName() : "");
 
                             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
                             applist.setAdapter(arrayAdapter);
