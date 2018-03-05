@@ -25,12 +25,12 @@ public class ViewQuestApplicants extends AppCompatActivity {
     ListView applist;
     Button back;
 
-    List<String> applicantList = new ArrayList();
-    List<String> tempList = new ArrayList();
+    ArrayList<String> applicantList = new ArrayList<String>();
+    ArrayList<String> tempList = new ArrayList<String>();
 
-    ArrayList<String> idList = new ArrayList();
-    ArrayList<String> copyIdList = new ArrayList();
-    List<String> userPostID = new ArrayList<>();
+    ArrayList<String> idList = new ArrayList<String>();
+    ArrayList<String> copyIdList = new ArrayList<String>();
+    ArrayList<String> userPostID = new ArrayList<String>();
 
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
@@ -69,9 +69,6 @@ public class ViewQuestApplicants extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*
-        creating the questlist, also known as itemList from the xml file. I'm 90% sure that this is how you access it. The documentation on the ListView is actually god fucking awful. So, yaknow.
-         */
         applist = (ListView) findViewById(R.id.applicantList);
 
         Intent intentBundle = getIntent();
@@ -83,40 +80,38 @@ public class ViewQuestApplicants extends AppCompatActivity {
         }
 
         final String postPath = postID.replace("%40", "@");
-
-        //I think this is the part that's giving me my error, but I'm not sure, I mostly just got it from your accountPage file
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
-        databaseReference.child(postPath);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                tempList = (ArrayList<String>)dataSnapshot.child("/applicants/").getValue();
 
-                QBPost post = dataSnapshot.getValue(QBPost.class);
-                tempList = post.getApplicants();
-
-                for (int i = 0; i < tempList.size(); i++) {
+                for (int i = 0; i < tempList.size(); i++)
+                {
                     String pathUser = "users/" + tempList.get(i) + "/";
 
-                    final FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
-                    DatabaseReference databaseReferenceUser = databaseUser.getReference();
-                    databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                    DatabaseReference databaseReferenceUser = database.getReference();
+                    databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener()
+                    {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(DataSnapshot dataSnapshot)
+                        {
                             user = dataSnapshot.getValue(QBUser.class);
                             applicantList.add(user.getName());
-                            //Log.d("applicant shit", applicantList.get(0));
+
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
+                            applist.setAdapter(arrayAdapter);
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(DatabaseError databaseError)
+                        {
 
                         }
                     });
-
                 }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
-                applist.setAdapter(arrayAdapter);
             }
 
             @Override
@@ -124,7 +119,6 @@ public class ViewQuestApplicants extends AppCompatActivity {
 
             }
         });
-
     }
 
 }
