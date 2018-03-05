@@ -93,7 +93,7 @@ public class QuestList extends AppCompatActivity {
                 Intent createIntent = new Intent(QuestList.this,
                         PostNewQuest.class);
                 startActivity(createIntent);
-                finish();
+//                finish();
                 //Go to account management page
 
             }
@@ -298,6 +298,7 @@ public class QuestList extends AppCompatActivity {
         /*
         creating the questlist, also known as itemList from the xml file. I'm 90% sure that this is how you access it. The documentation on the ListView is actually god fucking awful. So, yaknow.
          */
+        titles.clear();
         questList = (ListView) findViewById(R.id.itemList);
         final String path = "posts/";
 

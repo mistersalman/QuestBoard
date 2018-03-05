@@ -71,6 +71,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        applicantList.clear();
         applist = (ListView) findViewById(R.id.applicantList);
 
         Intent intentBundle = getIntent();

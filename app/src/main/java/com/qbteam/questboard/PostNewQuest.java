@@ -41,6 +41,13 @@ public class PostNewQuest extends AppCompatActivity {
         postQuestButton = (Button) findViewById(R.id.postQuestButton);
         backButton = (Button) findViewById(R.id.backButton);
 
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                PostNewQuest.super.onBackPressed();
+//            }
+//        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
