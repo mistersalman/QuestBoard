@@ -61,7 +61,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
                 bundle.putString("employeeID", employeeID.get(position));
                 viewIntent.putExtras(bundle);
                 startActivity(viewIntent);
-                finish();
+//                finish();
             }
         });
 
