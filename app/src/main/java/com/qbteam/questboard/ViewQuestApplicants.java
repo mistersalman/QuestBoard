@@ -56,11 +56,13 @@ public class ViewQuestApplicants extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createIntent = new Intent(ViewQuestApplicants.this,
-                        ViewPostedQuestEmployer.class);
-                startActivity(createIntent);
+                Intent viewIntent = new Intent(ViewQuestApplicants.this, ViewPostedQuestEmployer.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("postID", postID);
+                viewIntent.putExtras(bundle);
+                startActivity(viewIntent);
                 finish();
-                //Go to account management page
+//                ViewQuestApplicants.super.onBackPressed();
             }
         });
     }
