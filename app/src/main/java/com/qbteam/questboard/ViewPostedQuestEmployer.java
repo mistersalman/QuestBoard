@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
-    private Button viewApplicantsButton, applyEditQuestButton, closeJobButton, backButton;
+    private Button viewApplicantsButton, applyEditQuestButton, closeJobButton, backButton, viewQuestGiverProfileButton;
 
     String postID;
 
@@ -46,6 +46,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         applyEditQuestButton = (Button) findViewById(R.id.editQuestButton);
         closeJobButton = (Button) findViewById(R.id.closeJobButton);
         backButton = (Button) findViewById(R.id.backButton);
+        viewQuestGiverProfileButton = (Button) findViewById(R.id.viewQuestGiverProfileButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +102,16 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        viewQuestGiverProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(ViewPostedQuestEmployer.this,
+                        AccountPageOwner.class);
+                startActivity(createIntent);
+                finish();
             }
         });
     }

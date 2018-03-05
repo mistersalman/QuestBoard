@@ -28,6 +28,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
 
     ArrayList<String> applicantList = new ArrayList<String>();
     ArrayList<String> tempList = new ArrayList<String>();
+    ArrayList<String>  employeeID = new ArrayList<String>();
 
     FirebaseAuth mobileAuth;
     FirebaseUser currentUser;
@@ -57,6 +58,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
                 Intent viewIntent = new Intent(ViewQuestApplicants.this, AccountPageEmployer.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("postID", tempList.get(position));
+                bundle.putString("employeeID", employeeID.get(position));
                 viewIntent.putExtras(bundle);
                 startActivity(viewIntent);
                 finish();
@@ -113,6 +115,7 @@ public class ViewQuestApplicants extends AppCompatActivity {
                         {
                             user = dataSnapshot.getValue(QBUser.class);
                             applicantList.add(user != null ?  user.getName() : "");
+                            employeeID.add(dataSnapshot.getKey());
 
                             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
                             applist.setAdapter(arrayAdapter);
