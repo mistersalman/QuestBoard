@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ViewPostedQuestEmployer extends AppCompatActivity {
 
     private TextView questTitleTextView2, questDescriptionTextView2, requirementsTextView2, rewardsTextView2;
-    private Button viewApplicantsButton, applyEditQuestButton, closeJobButton, backButton, viewQuestGiverProfileButton;
+    private Button viewApplicantsButton, editQuestButton, closeJobButton, backButton, viewQuestGiverProfileButton;
 
     String postID;
 
@@ -43,7 +43,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
         final String postPath = postID.replace("%40", "@");
 
         viewApplicantsButton = (Button) findViewById(R.id.viewApplicantsButton);
-        applyEditQuestButton = (Button) findViewById(R.id.editQuestButton);
+        editQuestButton = (Button) findViewById(R.id.editQuestButton);
         closeJobButton = (Button) findViewById(R.id.closeJobButton);
         backButton = (Button) findViewById(R.id.backButton);
         viewQuestGiverProfileButton = (Button) findViewById(R.id.viewQuestGiverProfileButton);
@@ -71,7 +71,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
             }
         });
 
-        applyEditQuestButton.setOnClickListener(new View.OnClickListener() {
+        editQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentEdit = new Intent(ViewPostedQuestEmployer.this, EditPostedQuest.class);
@@ -111,7 +111,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
                 Intent createIntent = new Intent(ViewPostedQuestEmployer.this,
                         AccountPageOwner.class);
                 startActivity(createIntent);
-                finish();
+//                finish();
             }
         });
     }
