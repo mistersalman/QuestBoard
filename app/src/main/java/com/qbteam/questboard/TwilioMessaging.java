@@ -81,7 +81,7 @@ public class TwilioMessaging extends AppCompatActivity {
                     mGeneralChannel.getMessages().sendMessage(message, new StatusListener() {
                         @Override
                         public void onSuccess() {
-                            MainActivity.this.runOnUiThread(new Runnable() {
+                            TwilioMessaging.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     // need to modify user interface elements on the UI thread
@@ -123,11 +123,11 @@ public class TwilioMessaging extends AppCompatActivity {
                             ChatClient.Properties.Builder builder = new ChatClient.Properties.Builder();
                             builder.setSynchronizationStrategy(ChatClient.SynchronizationStrategy.ALL);
                             ChatClient.Properties props = builder.createProperties();
-                            ChatClient.create(MainActivity.this,accessToken,props,mChatClientCallback);
+                            ChatClient.create(TwilioMessaging.this,accessToken,props,mChatClientCallback);
 
                         } else {
                             Log.e(TAG,e.getMessage(),e);
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(TwilioMessaging.this,
                                     R.string.error_retrieving_access_token, Toast.LENGTH_SHORT)
                                     .show();
                         }
@@ -206,7 +206,7 @@ public class TwilioMessaging extends AppCompatActivity {
         @Override
         public void onMessageAdded(final Message message) {
             Log.d(TAG, "Message added");
-            MainActivity.this.runOnUiThread(new Runnable() {
+            TwilioMessaging.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     // need to modify user interface elements on the UI thread
