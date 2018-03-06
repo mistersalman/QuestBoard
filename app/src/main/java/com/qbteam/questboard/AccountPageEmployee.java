@@ -57,7 +57,10 @@ public class AccountPageEmployee extends AppCompatActivity {
     FirebaseUser currentUser;
 
     QBUser employerUser = new QBUser();
+    QBPost currentPost = new QBPost();
     String userID;
+    String postID;
+    String userType = "employee";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +80,10 @@ public class AccountPageEmployee extends AppCompatActivity {
         if(extrasBundle != null)
         {
             userID = extrasBundle.getString("employerID", userID);
+            postID = extrasBundle.getString("postID", postID);
         }
 
+        String postPath = postID.replace("%40", "@");
 
         String pathUser = "users/" + userID + "/";
         FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
@@ -96,6 +101,20 @@ public class AccountPageEmployee extends AppCompatActivity {
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(imageView);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final FirebaseDatabase databasePost = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReferencePost = databasePost.getReference();
+        databaseReferencePost.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                currentPost = dataSnapshot.getValue(QBPost.class);
             }
 
             @Override
@@ -150,11 +169,24 @@ public class AccountPageEmployee extends AppCompatActivity {
         goRatings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentEdit = new Intent(AccountPageEmployee.this, Ratings.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userID", userID);
-                intentEdit.putExtras(bundle);
-                startActivity(intentEdit);
+                if(!currentPost.hiredID().equals(currentUser.getUid()))
+                {
+                    Toast.makeText(AccountPageEmployee.this, "You were not hired for this quest", Toast.LENGTH_LONG).show();
+                }
+                else if(currentPost.getRated())
+                {
+                    Toast.makeText(AccountPageEmployee.this, "You have already rated this user", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Intent intentEdit = new Intent(AccountPageEmployee.this, Ratings.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userID", userID);
+                    bundle.putString("postID", postID);
+                    bundle.putString("userType", userType);
+                    intentEdit.putExtras(bundle);
+                    startActivity(intentEdit);
+                }
             }
         });
     }

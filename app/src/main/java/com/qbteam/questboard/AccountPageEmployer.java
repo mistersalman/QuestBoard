@@ -48,7 +48,7 @@ public class AccountPageEmployer extends AppCompatActivity {
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
-    Button editAcct, goBack, downloadResume, goRatings;
+    Button editAcct, goBack, downloadResume, goRatings, hireButton;
     ImageView imageView;
     RatingBar Ratings;
 
@@ -57,7 +57,10 @@ public class AccountPageEmployer extends AppCompatActivity {
     FirebaseUser currentUser;
 
     QBUser employeeUser = new QBUser();
+    QBPost currentPost = new QBPost();
     String userID;
+    String postID;
+    String userType = "employer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class AccountPageEmployer extends AppCompatActivity {
         goBack = (Button) findViewById(R.id.backButton);
         downloadResume = (Button) findViewById(R.id.downloadResume);
         goRatings = (Button) findViewById(R.id.rateButton);
+        hireButton = (Button) findViewById(R.id.hireButton);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -77,8 +81,10 @@ public class AccountPageEmployer extends AppCompatActivity {
         if(extrasBundle != null)
         {
             userID = extrasBundle.getString("employeeID", userID);
+            postID = extrasBundle.getString("postID", postID);
         }
 
+        final String postPath = postID.replace("%40", "@");
 
         String pathUser = "users/" + userID + "/";
         FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
@@ -96,6 +102,20 @@ public class AccountPageEmployer extends AppCompatActivity {
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(imageView);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final FirebaseDatabase databasePost = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReferencePost = databasePost.getReference();
+        databaseReferencePost.child(postPath).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                currentPost = dataSnapshot.getValue(QBPost.class);
             }
 
             @Override
@@ -150,11 +170,43 @@ public class AccountPageEmployer extends AppCompatActivity {
         goRatings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentEdit = new Intent(AccountPageEmployer.this, Ratings.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userID", userID);
-                intentEdit.putExtras(bundle);
-                startActivity(intentEdit);
+                if(!currentPost.hiredID().equals(userID))
+                {
+                    Toast.makeText(AccountPageEmployer.this, "You did not hire this user for this quest", Toast.LENGTH_LONG).show();
+
+                }
+                else if(currentPost.getCompleted())
+                {
+                    Toast.makeText(AccountPageEmployer.this, "You have already rated this user", Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    Intent intentEdit = new Intent(AccountPageEmployer.this, Ratings.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userID", userID);
+                    bundle.putString("postID", postID);
+                    bundle.putString("userType", userType);
+                    intentEdit.putExtras(bundle);
+                    startActivity(intentEdit);
+                }
+            }
+        });
+
+        hireButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(currentPost.getHired())
+                {
+                    Toast.makeText(AccountPageEmployer.this, "You have already hired a user for this quest", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    databaseReferencePost.child(postPath).child("hired").setValue(true);
+                    databaseReferencePost.child(postPath).child("hiredID").setValue(userID);
+                    Toast.makeText(AccountPageEmployer.this, "You have hired this user for your quest", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
     }

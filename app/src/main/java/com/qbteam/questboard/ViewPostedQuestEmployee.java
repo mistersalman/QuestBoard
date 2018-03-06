@@ -106,6 +106,7 @@ public class ViewPostedQuestEmployee extends AppCompatActivity {
                         Intent intentEdit = new Intent(ViewPostedQuestEmployee.this, AccountPageEmployee.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("employerID", post.getPosterID());
+                        bundle.putString("postID", postID);
                         intentEdit.putExtras(bundle);
                         startActivity(intentEdit);
 //                        finish();

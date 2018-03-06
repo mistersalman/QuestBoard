@@ -57,8 +57,8 @@ public class ViewQuestApplicants extends AppCompatActivity {
                 Log.d("id view: ", tempList.get(position));
                 Intent viewIntent = new Intent(ViewQuestApplicants.this, AccountPageEmployer.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("postID", tempList.get(position));
-                bundle.putString("employeeID", employeeID.get(position));
+                bundle.putString("employeeID", tempList.get(position));
+                bundle.putString("postID", postID);
                 viewIntent.putExtras(bundle);
                 startActivity(viewIntent);
 //                finish();
@@ -115,7 +115,6 @@ public class ViewQuestApplicants extends AppCompatActivity {
                         {
                             user = dataSnapshot.getValue(QBUser.class);
                             applicantList.add(user != null ?  user.getName() : "");
-                            employeeID.add(dataSnapshot.getKey());
 
                             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ViewQuestApplicants.this, android.R.layout.simple_list_item_1, applicantList);
                             applist.setAdapter(arrayAdapter);

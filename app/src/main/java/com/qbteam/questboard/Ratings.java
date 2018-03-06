@@ -10,14 +10,31 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by Clinton on 3/3/2018.
  */
 
 public class Ratings extends Activity {
+
+    QBPost currentPost = new QBPost();
+    QBUser user = new QBUser();
+    String userID = new String();
+    String postID = new String();
+    String userType = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +55,73 @@ public class Ratings extends Activity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         submitButton = (Button) findViewById(R.id.submitButton);
 
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
+
+        if(extrasBundle != null)
+        {
+            userID = extrasBundle.getString("userID", userID);
+            postID = extrasBundle.getString("postID", postID);
+            userType = extrasBundle.getString("userType", userType);
+        }
+
+        Log.d("user id view: ", userID);
+        Log.d("post id view: ", postID);
+        Log.d("user type view: ", userType);
+
+        final String postPath = postID.replace("%40", "@");
+
+        Log.d("user email view: ", user.getEmail());
+        final FirebaseDatabase databasePost = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReferencePost = databasePost.getReference();
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Float rating = ratingBar.getRating();
+                final Float rating = ratingBar.getRating();
+                if(userType.equals("employee"))
+                {
+                    final String pathUser = "users/" + userID + "/";
+                    FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReferenceUser = databaseUser.getReference();
+                    databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            user = dataSnapshot.getValue(QBUser.class);
+                            databaseReferencePost.child(postPath).child("rated").setValue(true);
+                            user.addRating(rating);
+                            databaseReferencePost.child(pathUser).setValue(user);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+                else
+                {
+                    final String pathUser = "users/" + userID + "/";
+                    FirebaseDatabase databaseUser = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReferenceUser = databaseUser.getReference();
+                    databaseReferenceUser.child(pathUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            user = dataSnapshot.getValue(QBUser.class);
+                            databaseReferencePost.child(postPath).child("completed").setValue(true);
+                            user.addRating(rating);
+                            databaseReferencePost.child(pathUser).setValue(user);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
                 finish();
             }
         });
