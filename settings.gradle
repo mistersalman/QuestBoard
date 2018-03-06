@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':twilio-chat-android-2.0.8'
