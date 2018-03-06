@@ -34,10 +34,11 @@
         <activity android:name=".ViewPostedQuestEmployee" />
         <activity android:name=".AccountPageEmployee" />
         <activity android:name=".AccountPageEmployer" />
-        <activity android:name=".Ratings"
-            android:theme="@style/AppTheme.CustomTheme"
-            />
-        <activity android:name=".ViewQuestApplicants"></activity>
+        <activity
+            android:name=".Ratings"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".ViewQuestApplicants" />
+        <activity android:name=".TwilioMessaging"></activity>
     </application>
 
 </manifest>
