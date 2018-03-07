@@ -167,6 +167,7 @@ public class AccountPageEdit extends AppCompatActivity implements LocationListen
                         databaseReference.child(path).child("age").setValue(age);
                         databaseReference.child(path).child("latitude").setValue(latitude);
                         databaseReference.child(path).child("longitude").setValue(longitude);
+                        databaseReference.child(path).child("address").setValue(address);
                     }
 
                     @Override

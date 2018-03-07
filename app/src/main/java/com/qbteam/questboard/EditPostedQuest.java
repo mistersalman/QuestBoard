@@ -103,6 +103,7 @@ public class EditPostedQuest extends AppCompatActivity implements LocationListen
                         databaseReference.child(postPath).child("tags").setValue(tags);
                         databaseReference.child(postPath).child("latitude").setValue(latitude);
                         databaseReference.child(postPath).child("longitude").setValue(longitude);
+                        databaseReference.child(postPath).child("address").setValue(address);
                         Toast.makeText(EditPostedQuest.this, "Info Updated!", Toast.LENGTH_LONG).show();
 
                         Intent intentEdit = new Intent(EditPostedQuest.this, ViewPostedQuestEmployer.class);
