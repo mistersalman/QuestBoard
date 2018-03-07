@@ -1,6 +1,7 @@
 package com.qbteam.questboard;
 
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -156,7 +157,13 @@ public class AccountPageEmployee extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Intent i = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(i);
+                        i.setPackage("com.android.chrome");
+                        try {
+                            startActivity(i);
+                        } catch (ActivityNotFoundException a) {
+                            i.setPackage(null);
+                            startActivity(i);
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

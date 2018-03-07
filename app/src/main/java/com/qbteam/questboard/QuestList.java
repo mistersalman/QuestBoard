@@ -349,13 +349,22 @@ public class QuestList extends AppCompatActivity {
 
                     //I believe this is the tags thing, so not my business
                     dataBaseTags.add(temp);
-                    for(int x = 0; x < userPostID.size(); x++)
+                    if(ds.child("/hiredID").getValue(String.class).equals(currentUser.getUid()))
                     {
-                        if(userPostID.get(x).equals(ds.getKey()+"/"))
+                        titleList.add(tempString);
+                        dataBaseToggleTags.add(temp);
+                        idTempList.add(key);
+                    }
+                    else
+                    {
+                        for(int x = 0; x < userPostID.size(); x++)
                         {
-                            titleList.add(tempString);
-                            dataBaseToggleTags.add(temp);
-                            idTempList.add(key);
+                            if(userPostID.get(x).equals(ds.getKey()+"/"))
+                            {
+                                titleList.add(tempString);
+                                dataBaseToggleTags.add(temp);
+                                idTempList.add(key);
+                            }
                         }
                     }
                 }
