@@ -19,6 +19,8 @@ public class QBPost {
     boolean hired;
     boolean completed;
     boolean rated;
+    double latitude;
+    double longitude;
 
     QBPost()
     {
@@ -33,9 +35,11 @@ public class QBPost {
         hired = false;
         completed = false;
         rated = false;
+        latitude = 0.0;
+        longitude = 0.0;
     }
 
-    QBPost(String title, String description, String requirements, String rewards, List<String> tags, String posterID)
+    QBPost(String title, String description, String requirements, String rewards, List<String> tags, String posterID, double latitude, double longitude)
     {
         this.title = title;
         this.description = description;
@@ -48,6 +52,8 @@ public class QBPost {
         hired = false;
         completed = false;
         rated = false;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     String getTitle() {return title;}
