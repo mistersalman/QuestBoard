@@ -187,7 +187,7 @@ public class ViewPostedQuestEmployer extends AppCompatActivity {
                 distance = loc_user.distanceTo(loc_post) * (float) 0.000621371;
                 Log.d("addr", post.address);
                 String addr = post.getAddress() + " (" + Float.toString(distance) + " miles away)";
-                locationTextView.setText(post.getAddress());
+                locationTextView.setText(addr);
             }
 
             @Override
