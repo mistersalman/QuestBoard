@@ -371,7 +371,7 @@ public class AccountPageEmployee extends AppCompatActivity {
                 loc_employee.setLatitude(latitude);
                 loc_employee.setLongitude(longitude);
                 distance = loc_employer.distanceTo(loc_employee) * (float) 0.000621371;
-                String addr = user.address + " (" + Float.toString(distance) + " miles away)";
+                String addr = user.getAddress() + " (" + Float.toString(distance) + " miles away)";
                 locationTextView2.setText(addr);
             }
 
