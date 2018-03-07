@@ -48,7 +48,7 @@ public class AccountPageEmployee extends AppCompatActivity {
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     TextView Bio, Name, Education, Age;
-    Button editAcct, goBack, downloadResume, goRatings;
+    Button editAcct, goBack, downloadResume, goRatings, contactButton;
     ImageView imageView;
     RatingBar Ratings;
 
@@ -70,6 +70,21 @@ public class AccountPageEmployee extends AppCompatActivity {
         goBack = (Button) findViewById(R.id.backButton);
         downloadResume = (Button) findViewById(R.id.downloadResume);
         goRatings = (Button) findViewById(R.id.rateButton);
+
+        contactButton = (Button) findViewById(R.id.contactButton);
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(AccountPageEmployee.this,
+                        TwilioMessaging.class);
+
+//                Bundle bundle = new Bundle();
+//                bundle.putString("userID", userID);
+//                createIntent.putExtras(bundle);
+
+                startActivity(createIntent);
+            }
+        });
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();

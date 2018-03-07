@@ -33,13 +33,15 @@ public class TwilioMessaging extends AppCompatActivity {
     /*
        Change this URL to match the token URL for your Twilio Function
     */
-    final static String SERVER_TOKEN_URL = "https://YOUR_DOMAIN_HERE.twil.io/chat-token";
+//    final static String SERVER_TOKEN_URL = "https://YOUR_DOMAIN_HERE.twil.io/chat-token";
+    final static String SERVER_TOKEN_URL = "http://dea74d42.ngrok.io/chat/";
 
     final static String DEFAULT_CHANNEL_NAME = "general";
     final static String TAG = "TwilioChat";
 
     // Update this identity for each individual user, for instance after they login
-    private String mIdentity = "USER_IDENTITY";
+//    private String mIdentity = "USER_IDENTITY";
+    private String mIdentity = "RobynTest0";
 
     private RecyclerView mMessagesRecyclerView;
     private MessagesAdapter mMessagesAdapter;
@@ -56,7 +58,7 @@ public class TwilioMessaging extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_twilio_messaging);
 
         mMessagesRecyclerView = (RecyclerView) findViewById(R.id.messagesRecyclerView);
 
@@ -101,13 +103,14 @@ public class TwilioMessaging extends AppCompatActivity {
         });
 
         retrieveAccessTokenfromServer();
-
     }
 
     private void retrieveAccessTokenfromServer() {
         String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        String tokenURL = SERVER_TOKEN_URL + "?device=" + deviceId + "&identity=" + mIdentity;
+//        String tokenURL = SERVER_TOKEN_URL + "?device=" + deviceId + "&identity=" + mIdentity;
+        String tokenURL = "http://dea74d42.ngrok.io/token.php?device=" + deviceId + "&identity=" + mIdentity;
+
 
         Ion.with(this)
                 .load(tokenURL)
@@ -117,7 +120,7 @@ public class TwilioMessaging extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject result) {
                         if (e == null) {
                             String accessToken = result.get("token").getAsString();
-
+                            Log.d("AccessToken", accessToken);
                             setTitle(mIdentity);
 
                             ChatClient.Properties.Builder builder = new ChatClient.Properties.Builder();

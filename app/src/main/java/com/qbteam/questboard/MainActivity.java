@@ -11,13 +11,25 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button acctMgmt, logout, postQuest, viewQuestBoard;
+    private Button acctMgmt, logout, postQuest, viewQuestBoard;//, twilioTestButton;
     private FirebaseAuth mobileAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TWILIO TESTING
+//        twilioTestButton = (Button) findViewById(R.id.twilioTestButton);
+//        twilioTestButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent createIntent = new Intent(MainActivity.this,
+//                        TwilioMessaging.class);
+//                startActivity(createIntent);
+//                //Go to account management page
+//            }
+//        });
 
         postQuest = (Button) findViewById(R.id.postQuestButton);
         viewQuestBoard = (Button) findViewById(R.id.viewQuestBoardButton);

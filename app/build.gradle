@@ -35,7 +35,7 @@ dependencies {
 
 
     compile "com.twilio:chat-android:1.0.7"
-    compile 'com.koushikdutta.ion:ion:2.1.7'
+    compile 'com.koushikdutta.ion:ion:2.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
