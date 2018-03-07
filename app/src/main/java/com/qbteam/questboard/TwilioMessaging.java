@@ -1,5 +1,6 @@
 package com.qbteam.questboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,14 @@ public class TwilioMessaging extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twilio_messaging);
+
+        Intent intentBundle = getIntent();
+        Bundle extrasBundle = intentBundle.getExtras();
+
+        if(extrasBundle != null)
+        {
+            mIdentity = extrasBundle.getString("username", mIdentity).replaceAll(" ", "_");
+        }
 
         mMessagesRecyclerView = (RecyclerView) findViewById(R.id.messagesRecyclerView);
 

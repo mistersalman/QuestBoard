@@ -59,6 +59,7 @@ public class AccountPageEmployer extends AppCompatActivity {
     QBUser employeeUser = new QBUser();
     QBPost currentPost = new QBPost();
     String userID;
+    String username;
     String postID;
     String userType = "employer";
 
@@ -71,21 +72,6 @@ public class AccountPageEmployer extends AppCompatActivity {
         downloadResume = (Button) findViewById(R.id.downloadResume);
         goRatings = (Button) findViewById(R.id.rateButton);
         hireButton = (Button) findViewById(R.id.hireButton);
-
-        contactButton = (Button) findViewById(R.id.contactButton);
-        contactButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createIntent = new Intent(AccountPageEmployer.this,
-                        TwilioMessaging.class);
-
-//                Bundle bundle = new Bundle();
-//                bundle.putString("userID", userID);
-//                createIntent.putExtras(bundle);
-
-                startActivity(createIntent);
-            }
-        });
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -222,6 +208,38 @@ public class AccountPageEmployer extends AppCompatActivity {
                     Toast.makeText(AccountPageEmployer.this, "You have hired this user for your quest", Toast.LENGTH_LONG).show();
 
                 }
+            }
+        });
+
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+        String path = "users/" + currentUser.getUid().toString() + "/";
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QBUser user = dataSnapshot.getValue(QBUser.class);
+                username = user.getName();
+                contactButton = (Button) findViewById(R.id.contactButton);
+                contactButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent createIntent = new Intent(AccountPageEmployer.this,
+                                TwilioMessaging.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("username", username);
+                        createIntent.putExtras(bundle);
+
+                        startActivity(createIntent);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
