@@ -38,16 +38,4 @@ dependencies {
     compile 'com.koushikdutta.ion:ion:2.1.7'
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 apply plugin: 'com.google.gms.google-services'
