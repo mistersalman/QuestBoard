@@ -34,7 +34,7 @@ dependencies {
     compile 'com.android.support:design:26.0.0'
 
 
-    compile "com.twilio:chat-android:2.0.8"
+    compile "com.twilio:chat-android:1.0.7"
     compile 'com.koushikdutta.ion:ion:2.1.7'
 }
 
