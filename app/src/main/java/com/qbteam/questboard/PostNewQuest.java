@@ -122,7 +122,7 @@ public class PostNewQuest extends AppCompatActivity implements LocationListener{
                     System.out.println(postID);
 
                     final QBPost post = new QBPost(questTitleEditText.getText().toString(), questDescriptionEditText.getText().toString(),
-                            requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags, mobileAuth.getUid().toString(), latitude, longitude);
+                            requirementsEditText.getText().toString(), rewardsEditText.getText().toString(), tags, mobileAuth.getUid().toString(), latitude, longitude, address);
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference databaseReference = database.getReference();
                     final String postPath = "posts/" + postID + "/";
