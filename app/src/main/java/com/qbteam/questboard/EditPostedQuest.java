@@ -199,7 +199,7 @@ public class EditPostedQuest extends AppCompatActivity implements LocationListen
             Log.d("address", addresses.get(0).getAddressLine(0) + addresses.get(0).getAddressLine(1) + addresses.get(0).getAddressLine(2));
             latitude = location.getLatitude();
             longitude = location.getLongitude();
-            address = addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getAddressLine(1) + ", " + addresses.get(0).getAddressLine(2);
+            address = addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getAddressLine(1) /*+ ", " + addresses.get(0).getAddressLine(2)*/;
             Log.d("address:", address);
             Log.d("stored latitude", Double.toString(latitude));
             Log.d("stored longitude", Double.toString(longitude));

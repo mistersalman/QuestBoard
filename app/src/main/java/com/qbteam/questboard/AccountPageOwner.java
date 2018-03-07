@@ -48,7 +48,7 @@ public class AccountPageOwner extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    TextView Bio, Name, Education, Age;
+    TextView Bio, Name, Education, Age, locationTextView2;
     Button editAcct, goBack, downloadResume;
     ImageView imageView;
     RatingBar Ratings;
@@ -209,6 +209,7 @@ public class AccountPageOwner extends AppCompatActivity {
         Education = (TextView) findViewById(R.id.Education);
         Age= (TextView) findViewById(R.id.Age);
         Ratings = (RatingBar) findViewById(R.id.ratingBar);
+        locationTextView2 = (TextView) findViewById(R.id.locationTextView2);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
@@ -232,6 +233,7 @@ public class AccountPageOwner extends AppCompatActivity {
                     averageRating = (float)5;
                 }
                 Ratings.setRating(averageRating);
+                locationTextView2.setText(user.getAddress());
             }
 
             @Override

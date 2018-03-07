@@ -33,7 +33,7 @@ public class QBUser {
         ratings = new ArrayList<>();
         latitude = 0.0;
         longitude = 0.0;
-        address = "";
+        address = " ";
     }
 
     QBUser(String email)
@@ -49,7 +49,7 @@ public class QBUser {
         ratings = new ArrayList<>();
         latitude = 0.0;
         longitude = 0.0;
-        address = "";
+        address = " ";
     }
 
     void setBio(String bio)
@@ -107,4 +107,6 @@ public class QBUser {
     float getTotalStars() {return totalStars; }
 
     List<Float> getRatings() {return ratings; }
+
+    String getAddress() {return address; }
 }

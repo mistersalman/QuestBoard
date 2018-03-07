@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -48,7 +49,7 @@ public class AccountPageEmployer extends AppCompatActivity {
     private static final int PDF_REQUEST_CODE = 23;
     float averageRating = 0;
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    TextView Bio, Name, Education, Age;
+    TextView Bio, Name, Education, Age, locationTextView2;
     Button editAcct, goBack, downloadResume, goRatings, hireButton, contactButton;
     ImageView imageView;
     RatingBar Ratings;
@@ -63,6 +64,10 @@ public class AccountPageEmployer extends AppCompatActivity {
     String username;
     String postID;
     String userType = "employer";
+
+    double latitude = 0.0;
+    double longitude = 0.0;
+    float distance = (float) 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -335,10 +340,32 @@ public class AccountPageEmployer extends AppCompatActivity {
         Education = (TextView) findViewById(R.id.Education);
         Age= (TextView) findViewById(R.id.Age);
         Ratings = (RatingBar) findViewById(R.id.ratingBar);
+        locationTextView2 = (TextView) findViewById(R.id.locationTextView2);
 
         mobileAuth = FirebaseAuth.getInstance();
         currentUser = mobileAuth.getCurrentUser();
-        String path = "users/" + userID + "/";
+        String path = "users/" + currentUser.getUid().toString() + "/";
+
+        final FirebaseDatabase database_you = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference_you = database_you.getReference();
+        databaseReference_you.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QBUser user = dataSnapshot.getValue(QBUser.class);
+                Log.d("any key name", dataSnapshot.toString());
+                latitude = user.latitude;
+                longitude = user.longitude;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mobileAuth = FirebaseAuth.getInstance();
+        currentUser = mobileAuth.getCurrentUser();
+        path = "users/" + userID + "/";
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference();
@@ -358,6 +385,16 @@ public class AccountPageEmployer extends AppCompatActivity {
                     averageRating = (float)5;
                 }
                 Ratings.setRating(averageRating);
+
+                Location loc_employer = new Location("");
+                loc_employer.setLatitude(user.latitude);
+                loc_employer.setLongitude(user.longitude);
+                Location loc_employee = new Location("");
+                loc_employee.setLatitude(latitude);
+                loc_employee.setLongitude(longitude);
+                distance = loc_employer.distanceTo(loc_employee) * (float) 0.000621371;
+                String addr = user.getAddress() + " (" + Float.toString(distance) + " miles away)";
+                locationTextView2.setText(addr);
             }
 
             @Override

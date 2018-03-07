@@ -38,7 +38,7 @@ public class QBPost {
         rated = false;
         latitude = 0.0;
         longitude = 0.0;
-        address = "";
+        address = " ";
     }
 
     QBPost(String title, String description, String requirements, String rewards, List<String> tags, String posterID, double latitude, double longitude, String address)
@@ -56,7 +56,7 @@ public class QBPost {
         rated = false;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.address = "";
+        this.address = address;
     }
 
     String getTitle() {return title;}
@@ -70,5 +70,6 @@ public class QBPost {
     boolean getHired() {return hired;}
     boolean getCompleted() {return completed;}
     boolean getRated() {return rated;}
+    String getAddress() {return address;}
 
 }
