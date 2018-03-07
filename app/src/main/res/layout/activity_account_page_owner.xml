@@ -26,7 +26,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Name"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bio"
+        android:textColor="@color/black"
+        android:textSize="3mm"
         app:layout_constraintBottom_toTopOf="@+id/Bio"
         app:layout_constraintStart_toStartOf="@+id/Bio" />
 
@@ -46,6 +48,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Resume"
+        android:textColor="@color/black"
+        android:textSize="3mm"
         app:layout_constraintBottom_toTopOf="@+id/downloadResume"
         app:layout_constraintEnd_toEndOf="@+id/downloadResume"
         app:layout_constraintStart_toStartOf="@+id/downloadResume" />
@@ -69,7 +73,8 @@
         android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Inputted bio"
+        android:text="Unspecified"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -91,6 +96,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Education"
+        android:textColor="@color/black"
+        android:textSize="3mm"
         app:layout_constraintBottom_toTopOf="@+id/Education"
         app:layout_constraintStart_toStartOf="@+id/Education" />
 
@@ -102,6 +109,7 @@
         android:layout_marginLeft="28dp"
         android:layout_marginTop="32dp"
         android:text="Unspecified"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/editButton" />
 
@@ -110,6 +118,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Age"
+        android:textColor="@color/black"
+        android:textSize="3mm"
         app:layout_constraintBottom_toTopOf="@+id/Age"
         app:layout_constraintStart_toStartOf="@+id/Age" />
 
@@ -119,6 +129,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="30dp"
         android:text="Unspecified"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/Education"
         app:layout_constraintTop_toBottomOf="@+id/Education" />
 

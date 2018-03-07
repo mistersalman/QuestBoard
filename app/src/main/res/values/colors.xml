@@ -7,4 +7,5 @@
     <color name="colorAccent">#0e7591</color>
     <!--FF4081-->
     <color name="grey">#e5e5e5</color>
+    <color name="black">#000000</color>
 </resources>
