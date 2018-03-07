@@ -175,4 +175,25 @@
         app:layout_constraintTop_toBottomOf="@+id/rateButton"
         android:textAllCaps="false"/>
 
+    <TextView
+        android:id="@+id/locationTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="3mm"
+        app:layout_constraintBottom_toTopOf="@+id/locationTextView2"
+        app:layout_constraintStart_toStartOf="@+id/locationTextView2" />
+
+    <TextView
+        android:id="@+id/locationTextView2"
+        android:layout_width="180dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="30dp"
+        android:text="Unspecified"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/Age"
+        app:layout_constraintTop_toBottomOf="@+id/Age" />
+
 </android.support.constraint.ConstraintLayout>

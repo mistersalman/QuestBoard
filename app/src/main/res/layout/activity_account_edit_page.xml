@@ -160,7 +160,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="Add/Edit Location"
+        android:text="Add Location"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/changePicture"
         app:layout_constraintEnd_toEndOf="parent"
